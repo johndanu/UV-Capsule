@@ -1,3 +1,4 @@
+import 'package:capsule/Screens/eChannelling.dart';
 import 'package:flutter/material.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -32,7 +33,12 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
             Icons.help,
             color: Colors.black,
           ),
-          onPressed: () {},
+          onPressed: () {
+             Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => const EChannelling()),
+  );
+          },
         ),
         IconButton(
           icon: Icon(

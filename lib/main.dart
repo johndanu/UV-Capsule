@@ -1,4 +1,3 @@
-
 import 'package:capsule/Screens/loadingPage.dart';
 import 'package:flutter/material.dart';
 
