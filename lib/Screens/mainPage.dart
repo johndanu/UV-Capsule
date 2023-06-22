@@ -8,7 +8,8 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyAppBar(),
-      body: Column(
+      body:
+       Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Stack(

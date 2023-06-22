@@ -2,12 +2,12 @@ import 'package:capsule/Screens/orderPlaced.dart';
 import 'package:capsule/widgets/appbar.dart';
 import 'package:flutter/material.dart';
 
-class PrepareOrder extends StatefulWidget {
+class Payment extends StatefulWidget {
   @override
-  _PrepareOrderState createState() => _PrepareOrderState();
+  _PaymentState createState() => _PaymentState();
 }
 
-class _PrepareOrderState extends State<PrepareOrder> {
+class _PaymentState extends State<Payment> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,24 +47,65 @@ class _PrepareOrderState extends State<PrepareOrder> {
                 height: 40,
               ),
               Container(
-                child: Stack(
+                child: Column(
                   children: [
-                    Image.asset("assets/images/prepare.png"),
-                    Padding(
-                      padding: EdgeInsets.only(top: 175),
-                      child: Center(
-                        child: Text(
-                          "Waiting for merchant confirmation",
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.w600),
-                        ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("Confirm Payment"),
+                        Image.asset("assets/images/payment.png")
+                      ],
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Form(
+                      child: Column(
+                        children: [
+                          TextFormField(
+                            decoration: InputDecoration(
+                              labelText: 'Name On Card',
+                              border: OutlineInputBorder(),
+                            ),
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Please enter the Name On Card';
+                              }
+                              return null;
+                            },
+                          ),
+                          SizedBox(height: 20),
+                          TextFormField(
+                            keyboardType: TextInputType.phone,
+                            decoration: InputDecoration(
+                              labelText: 'Card Number',
+                              border: OutlineInputBorder(),
+                            ),
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Please enter the Card Number';
+                              }
+                              return null;
+                            },
+                          ),
+                          SizedBox(height: 20),
+                          TextFormField(
+                            decoration: InputDecoration(
+                              labelText: 'Delivery Address',
+                              border: OutlineInputBorder(),
+                            ),
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Please enter the delivery address';
+                              }
+                              return null;
+                            },
+                          ),
+                        ],
                       ),
                     ),
                   ],
                 ),
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(8)),
-                height: 200,
                 width: double.infinity,
               ),
               SizedBox(
@@ -91,7 +132,7 @@ class _PrepareOrderState extends State<PrepareOrder> {
                     ),
                   ),
                   child: Text(
-                    "VIEW YOUR ORDER",
+                    "PAY NOW",
                     style: TextStyle(fontSize: 18),
                   ),
                 ),
@@ -99,9 +140,6 @@ class _PrepareOrderState extends State<PrepareOrder> {
               SizedBox(
                 height: 15,
               ),
-              Center(
-                  child: TextButton(
-                      onPressed: () {}, child: Text("Go To My Orders")))
             ],
           ),
         ),

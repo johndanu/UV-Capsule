@@ -48,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: IndexedStack(
               index: _selectedIndex,
               children: [
-                buildHomePage(),
+                HomePage(),
                 MyOrdersPage(),
                 buildProfilePage(),
               ],
