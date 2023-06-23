@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:capsule/Screens/searchResult.dart';
 import 'package:capsule/widgets/appbar.dart';
 import 'package:flutter/material.dart';
 
@@ -57,6 +58,19 @@ class _EChannellingState extends State<EChannelling> {
     });
   }
 
+  String _getSelectedTypeName(int selectedType) {
+    switch (selectedType) {
+      case 0:
+        return 'Doctor';
+      case 1:
+        return 'Specialization';
+      case 2:
+        return 'Hospital';
+      default:
+        return '';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,7 +90,8 @@ class _EChannellingState extends State<EChannelling> {
                 Positioned(
                   bottom: 10,
                   right: 80,
-                  child: RichText(
+                  child:
+                   RichText(
                     text: TextSpan(
                       style: TextStyle(fontSize: 25.0, color: Colors.black),
                       children: <TextSpan>[
@@ -174,19 +189,26 @@ class _EChannellingState extends State<EChannelling> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Container(
+              child: 
+              Container(
                 height: 40,
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: Color(0xff2AB29D),
                   borderRadius: BorderRadius.all(Radius.circular(15)),
                 ),
-                child: ElevatedButton(
+                child:
+                 ElevatedButton(
                   onPressed: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(builder: (context) => (PrepareOrder())),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => (SearchResult(
+                                selectedType: _getSelectedTypeName(
+                                    _selectedType), // Convert int to string if necessary
+                                searchValue: _searchController.text,
+                              ))),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     primary: Color(0xff2AB29D),
