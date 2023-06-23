@@ -9,6 +9,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: Colors.white,
+      automaticallyImplyLeading: false,
       title: Row(
         children: [
           Image.asset(
@@ -34,10 +35,10 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
             color: Colors.black,
           ),
           onPressed: () {
-             Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => const EChannelling()),
-  );
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const EChannelling()),
+            );
           },
         ),
         IconButton(

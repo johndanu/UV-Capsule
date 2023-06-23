@@ -1,8 +1,14 @@
+import 'package:capsule/widgets/appbar.dart';
 import 'package:flutter/material.dart';
 
-
-  Widget buildProfilePage() {
-    return Center(
-      child: Text('Profile'),
+class ProfilePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: MyAppBar(),
+      body: Center(
+        child: Text('Profile'),
+      ),
     );
   }
+}

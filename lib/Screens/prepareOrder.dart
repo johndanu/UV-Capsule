@@ -1,5 +1,6 @@
 import 'package:capsule/Screens/orderPlaced.dart';
 import 'package:capsule/widgets/appbar.dart';
+import 'package:capsule/widgets/myBottomBar.dart';
 import 'package:flutter/material.dart';
 
 class PrepareOrder extends StatefulWidget {
@@ -106,6 +107,7 @@ class _PrepareOrderState extends State<PrepareOrder> {
           ),
         ),
       ),
+      bottomNavigationBar: MyBottomBar(),
     );
   }
 }
