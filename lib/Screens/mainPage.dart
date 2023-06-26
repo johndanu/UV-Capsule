@@ -8,8 +8,7 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyAppBar(),
-      body:
-       Column(
+      body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Stack(
@@ -18,24 +17,26 @@ class MainPage extends StatelessWidget {
                 'assets/images/02.png',
               ),
               Positioned(
-                bottom: 30,
-                right: 80,
-                child: RichText(
-                  text: TextSpan(
-                    style: TextStyle(fontSize: 25.0, color: Colors.black),
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: 'Welcome',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      TextSpan(
-                        text: ' to Capsule\n Pharmacies Network!',
-                        style: TextStyle(fontStyle: FontStyle.italic),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+                  bottom: 30,
+                  right: 80,
+                  child: RichText(
+                    text: TextSpan(
+                      style: TextStyle(
+                          fontSize: 25.0,
+                          color: Colors.black,
+                          fontFamily: 'Manrope'),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: 'Welcome',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        TextSpan(
+                          text: ' to Capsule\n Pharmacies Network!',
+                          style: TextStyle(fontStyle: FontStyle.italic),
+                        ),
+                      ],
+                    ),
+                  )),
             ],
           ),
           Container(
@@ -60,7 +61,7 @@ class MainPage extends StatelessWidget {
               ),
               child: Text(
                 "SIGN IN",
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(fontSize: 16),
               ),
             ),
           ),
@@ -90,7 +91,7 @@ class MainPage extends StatelessWidget {
               ),
               child: Text(
                 "SIGN UP",
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(fontSize: 16),
               ),
             ),
           )
