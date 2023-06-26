@@ -97,7 +97,10 @@ class _SignupOTPState extends State<SignupOTP> {
                         size: 15,
                       )),
                   Text("Don't have an acccount?"),
-                  TextButton(onPressed: () {}, child: Text("Sign up"))
+                  TextButton(
+                      onPressed: () {},
+                      child: Text("Sign up",
+                          style: TextStyle(color: Color(0xff2BB7A1))))
                 ],
               ))
             ],

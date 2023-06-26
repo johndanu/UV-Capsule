@@ -1,35 +1,25 @@
 import 'package:capsule/Screens/HomeScreen/home.dart';
 import 'package:capsule/Screens/HomeScreen/myOrders.dart';
 import 'package:capsule/Screens/HomeScreen/profile.dart';
-import 'package:capsule/widgets/appbar.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Bottom Navigation Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: HomeScreen(),
-    );
-  }
-}
-
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  final int selectedIndex;
+
+  const HomeScreen({Key? key, this.selectedIndex = 0}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _selectedIndex = 0; // Track the selected index
+  int _selectedIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex = widget.selectedIndex;
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -40,7 +30,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(),
       body: Column(
         children: [
           SizedBox(height: 16),
@@ -50,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 HomePage(),
                 MyOrdersPage(),
-                buildProfilePage(),
+                ProfilePage(),
               ],
             ),
           ),

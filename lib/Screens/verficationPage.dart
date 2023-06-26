@@ -33,15 +33,17 @@ class _VerficationState extends State<Verfication> {
               ),
               Text("Your Mobile Number +9471 900855 is verified Successfully!",
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
               SizedBox(
                 height: 60,
               ),
-              Container(
+              CircleAvatar(
+                backgroundColor: Color(0xff2BB7A1),
+                radius: 50,
                 child: Icon(
-                  Icons.verified,
-                  color: Color(0xff2BB7A1),
-                  size: 100,
+                  Icons.done,
+                  color: Colors.white,
+                  size: 90,
                 ),
               ),
               SizedBox(

@@ -32,7 +32,8 @@ dependencies:
     sdk: flutter
   intl_phone_field: ^3.1.0
   intl: ^0.17.0
-  auto_complete_textfield: ^2.1.0
+  autocomplete_textfield: ^2.0.1
+  
 
 
 

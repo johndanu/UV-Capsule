@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
         title: 'Loading Page Example',
         theme: ThemeData(
           primarySwatch: Colors.blue,
+          fontFamily: 'Manrope',
         ),
         home: LoadingPage(),
       ),

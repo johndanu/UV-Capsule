@@ -1,5 +1,6 @@
 import 'package:capsule/Screens/prepareOrder.dart';
 import 'package:capsule/widgets/appbar.dart';
+import 'package:capsule/widgets/myBottomBar.dart';
 import 'package:flutter/material.dart';
 
 class UploadPrescription extends StatefulWidget {
@@ -172,6 +173,7 @@ class _UploadPrescriptionState extends State<UploadPrescription> {
           ),
         ),
       ),
+      bottomNavigationBar: MyBottomBar(),
     );
   }
 }

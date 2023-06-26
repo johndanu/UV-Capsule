@@ -1,5 +1,6 @@
 import 'package:capsule/Screens/payment.dart';
 import 'package:capsule/widgets/appbar.dart';
+import 'package:capsule/widgets/myBottomBar.dart';
 import 'package:flutter/material.dart';
 
 class OrderPlaced extends StatefulWidget {
@@ -240,6 +241,7 @@ class _OrderPlacedState extends State<OrderPlaced> {
           ),
         ),
       ),
+      bottomNavigationBar: MyBottomBar(),
     );
   }
 }
