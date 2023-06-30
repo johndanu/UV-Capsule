@@ -19,37 +19,36 @@ class _OrderPlacedState extends State<OrderPlaced> {
 
   final List<List<String>> tableData = [
     ['Medicine', 'Tablets', 'Price'],
-    ['Acetaminophe ', '28', '560.00'],
+    ['Acetaminoph ', '28', '560.00'],
     ['Amoxicilli', '14', '630.00'],
     ['Ibuprofen ', '07', '714.00'],
   ];
 
   int _currentStep = 0;
-
   List<Step> _stepperList = [
-    const Step(
+    Step(
       title: Text('Order Placing'),
-      content: Text('Step 1 content'),
+      content: SizedBox.shrink(),
     ),
-    const Step(
+    Step(
       title: Text('Waiting for merchant confirmation'),
-      content: Text('Step 2 content'),
+      content: SizedBox.shrink(),
     ),
-    const Step(
+    Step(
       title: Text('Confirm and pay'),
-      content: Text('Step 3 content'),
+      content: SizedBox.shrink(),
     ),
-    const Step(
+    Step(
       title: Text('Ready for delivery'),
-      content: Text('Step 4 content'),
+      content: SizedBox.shrink(),
     ),
-    const Step(
+    Step(
       title: Text('On delivery'),
-      content: Text('Step 5 content'),
+      content: SizedBox.shrink(),
     ),
-    const Step(
+    Step(
       title: Text('Order finished'),
-      content: Text('Step 6 content'),
+      content: SizedBox.shrink(),
     ),
   ];
 
@@ -284,20 +283,8 @@ class _OrderPlacedState extends State<OrderPlaced> {
                 decoration: const BoxDecoration(color: Color(0xffE0FEF7)),
                 child: Stepper(
                   currentStep: _currentStep,
-                  onStepContinue: () {
-                    setState(() {
-                      if (_currentStep < _stepperList.length - 1) {
-                        _currentStep += 1;
-                      }
-                    });
-                  },
-                  onStepCancel: () {
-                    setState(() {
-                      if (_currentStep > 0) {
-                        _currentStep -= 1;
-                      }
-                    });
-                  },
+                  onStepContinue: null, // Removed onStepContinue callback
+                  onStepCancel: null, // Removed onStepCancel callback
                   steps: _stepperList,
                 ),
               ),

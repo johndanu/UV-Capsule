@@ -1,3 +1,5 @@
+import 'package:capsule/Screens/homeScreen.dart';
+import 'package:capsule/Screens/payment.dart';
 import 'package:capsule/widgets/appbar.dart';
 import 'package:flutter/material.dart';
 
@@ -111,11 +113,13 @@ class _PlaceAppointmentState extends State<PlaceAppointment> {
                               ),
                               child: ElevatedButton(
                                 onPressed: () {
-                                  // Navigator.push(
-                                  //   context,
-                                  //   MaterialPageRoute(
-                                  //       builder: (context) => (PlaceAppointment())),
-                                  // );
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          HomeScreen(selectedIndex: 2),
+                                    ),
+                                  );
                                 },
                                 style: ElevatedButton.styleFrom(
                                   primary: Color(0xff385592),
@@ -207,10 +211,7 @@ class _PlaceAppointmentState extends State<PlaceAppointment> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => (PlaceAppointment(
-                          searchValue: widget.searchValue,
-                          selectedType: widget.selectedType,
-                        )),
+                        builder: (context) => (Payment()),
                       ),
                     );
                   },

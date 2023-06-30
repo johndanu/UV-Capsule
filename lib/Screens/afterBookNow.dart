@@ -1,3 +1,4 @@
+import 'package:capsule/Screens/homeScreen.dart';
 import 'package:capsule/Screens/payment.dart';
 import 'package:capsule/Screens/placeAppointment.dart';
 import 'package:capsule/widgets/appbar.dart';
@@ -222,11 +223,12 @@ class _AfterBookNowState extends State<AfterBookNow> {
                               ),
                               child: ElevatedButton(
                                 onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => (Payment())),
-                                  );
+                                  Navigator.pushReplacement(
+                   context,
+                   MaterialPageRoute(
+                     builder: (context) => HomeScreen(selectedIndex: 2),
+                   ),
+                 );
                                 },
                                 style: ElevatedButton.styleFrom(
                                   primary: Color(0xff3A5896),
