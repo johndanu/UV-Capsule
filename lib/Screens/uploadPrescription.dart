@@ -66,6 +66,7 @@ class _UploadPrescriptionState extends State<UploadPrescription> {
                   maxLines: 4,
                   decoration: InputDecoration(
                     hintText: 'Any Remark',
+                    hintStyle: TextStyle(fontWeight: FontWeight.w300),
                     border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey),
                     ),
@@ -79,7 +80,7 @@ class _UploadPrescriptionState extends State<UploadPrescription> {
                 ),
               ),
               SizedBox(
-                height: 50,
+                height: 30,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -95,12 +96,16 @@ class _UploadPrescriptionState extends State<UploadPrescription> {
                   ),
                 ],
               ),
+              SizedBox(
+                height: 10,
+              ),
               Form(
                 child: Column(
                   children: [
                     TextFormField(
                       decoration: InputDecoration(
                         labelText: 'Customer Name',
+                        hintStyle: TextStyle(fontWeight: FontWeight.w300),
                         border: OutlineInputBorder(),
                       ),
                       validator: (value) {
@@ -110,11 +115,12 @@ class _UploadPrescriptionState extends State<UploadPrescription> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 20),
+                    SizedBox(height: 15),
                     TextFormField(
                       keyboardType: TextInputType.phone,
                       decoration: InputDecoration(
                         labelText: 'Customer Phone',
+                        hintStyle: TextStyle(fontWeight: FontWeight.w300),
                         border: OutlineInputBorder(),
                       ),
                       validator: (value) {
@@ -128,6 +134,7 @@ class _UploadPrescriptionState extends State<UploadPrescription> {
                     TextFormField(
                       decoration: InputDecoration(
                         labelText: 'Delivery Address',
+                        hintStyle: TextStyle(fontWeight: FontWeight.w300),
                         border: OutlineInputBorder(),
                       ),
                       validator: (value) {

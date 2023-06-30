@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../Screens/homePage.dart';
+import '../Screens/homeScreen.dart';
 
 class MyBottomBar extends StatelessWidget {
   const MyBottomBar({

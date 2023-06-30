@@ -24,10 +24,10 @@ class _PlaceAppointmentState extends State<PlaceAppointment> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 60),
+                padding: const EdgeInsets.only(top: 50),
                 child: Text(
                   "Place Appointment",
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
+                  style: TextStyle(fontSize: 26, fontWeight: FontWeight.w700),
                 ),
               ),
               SizedBox(
@@ -178,7 +178,7 @@ class _PlaceAppointmentState extends State<PlaceAppointment> {
                             TextSpan(
                               text: '\n\nAppointment No : 13\n',
                               style: TextStyle(
-                                  fontWeight: FontWeight.w600, fontSize: 18),
+                                  fontWeight: FontWeight.w500, fontSize: 18),
                             ),
                           ],
                         ),

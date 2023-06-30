@@ -14,16 +14,17 @@ class _EChannellingState extends State<EChannelling> {
   int _selectedType = 0; // Initial selection index
 
   List<String> doctorsList = [
-    'Aathavan',
-    'Abi',
-    'John',
-    'Anjali',
-    'Anoji',
+    'john',
+    'Maria',
+    'Nushi',
+    'Mohammed',
+    'Jose',
   ];
 
   List<String> filteredDoctorsList = [];
 
   TextEditingController _searchController = TextEditingController();
+  bool showSuggestions = false; // Track the visibility of auto-suggestions
 
   @override
   void initState() {
@@ -90,8 +91,7 @@ class _EChannellingState extends State<EChannelling> {
                 Positioned(
                   bottom: 10,
                   right: 80,
-                  child:
-                   RichText(
+                  child: RichText(
                     text: TextSpan(
                       style: TextStyle(fontSize: 25.0, color: Colors.black),
                       children: <TextSpan>[
@@ -113,7 +113,7 @@ class _EChannellingState extends State<EChannelling> {
               padding: const EdgeInsets.only(left: 25),
               child: Text(
                 'Select Type',
-                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500),
               ),
             ),
             Row(
@@ -139,7 +139,7 @@ class _EChannellingState extends State<EChannelling> {
                   child: RadioListTile<int>(
                     title: AutoSizeText(
                       'Specialization',
-                      maxLines: 1,
+                      maxLines: 2,
                       minFontSize: 10,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -177,8 +177,14 @@ class _EChannellingState extends State<EChannelling> {
                 controller: _searchController,
                 decoration: InputDecoration(
                   labelText: 'Search Doctors Name (Max 30 Characters)',
+                  labelStyle: TextStyle(fontWeight: FontWeight.w300),
                   border: OutlineInputBorder(),
                 ),
+                onTap: () {
+                  setState(() {
+                    showSuggestions = true; // Show auto-suggestions on tap
+                  });
+                },
                 onChanged: (value) {
                   filterDoctorsList(value);
                 },
@@ -189,25 +195,23 @@ class _EChannellingState extends State<EChannelling> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: 
-              Container(
-                height: 40,
+              child: Container(
+                height: 50,
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: Color(0xff2AB29D),
                   borderRadius: BorderRadius.all(Radius.circular(15)),
                 ),
-                child:
-                 ElevatedButton(
+                child: ElevatedButton(
                   onPressed: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => (SearchResult(
-                                selectedType: _getSelectedTypeName(
-                                    _selectedType), // Convert int to string if necessary
-                                searchValue: _searchController.text,
-                              ))),
+                        builder: (context) => SearchResult(
+                          selectedType: _getSelectedTypeName(_selectedType),
+                          searchValue: _searchController.text,
+                        ),
+                      ),
                     );
                   },
                   style: ElevatedButton.styleFrom(
@@ -228,22 +232,23 @@ class _EChannellingState extends State<EChannelling> {
             ),
 
             // Auto-suggestion list
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: filteredDoctorsList.length,
-                itemBuilder: (context, index) {
-                  final name = filteredDoctorsList[index];
-                  return ListTile(
-                    title: Text(name),
-                    onTap: () {
-                      _selectName(name);
-                    },
-                  );
-                },
+            if (showSuggestions) // Render the list only if showSuggestions is true
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: filteredDoctorsList.length,
+                  itemBuilder: (context, index) {
+                    final name = filteredDoctorsList[index];
+                    return ListTile(
+                      title: Text(name),
+                      onTap: () {
+                        _selectName(name);
+                      },
+                    );
+                  },
+                ),
               ),
-            ),
 
             SizedBox(
               height: 20,

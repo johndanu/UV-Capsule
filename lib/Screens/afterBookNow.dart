@@ -1,3 +1,4 @@
+import 'package:capsule/Screens/payment.dart';
 import 'package:capsule/Screens/placeAppointment.dart';
 import 'package:capsule/widgets/appbar.dart';
 import 'package:flutter/material.dart';
@@ -103,7 +104,7 @@ class _AfterBookNowState extends State<AfterBookNow> {
                         Text(
                           "1 Result Found",
                           style: TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.w400),
+                              fontSize: 14, fontWeight: FontWeight.w400),
                         )
                       ],
                     ),
@@ -120,7 +121,7 @@ class _AfterBookNowState extends State<AfterBookNow> {
                             const Text(
                               "Groups by Hospitals",
                               style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w400),
+                                  fontSize: 14, fontWeight: FontWeight.w400),
                             ),
                             Transform.scale(
                               scale: 0.6,
@@ -170,7 +171,7 @@ class _AfterBookNowState extends State<AfterBookNow> {
                           ),
                           Text(
                             "Male",
-                            style: TextStyle(fontSize: 12),
+                            style: TextStyle(fontSize: 13),
                           )
                         ],
                       ),
@@ -183,7 +184,7 @@ class _AfterBookNowState extends State<AfterBookNow> {
                           children: [
                             Icon(
                               Icons.sim_card,
-                              size: 40,
+                              size: 30,
                             ),
                             SizedBox(
                               height: 10,
@@ -212,30 +213,30 @@ class _AfterBookNowState extends State<AfterBookNow> {
                               height: 10,
                             ),
                             Container(
-                              height: 50,
+                              height: 40,
                               width: double.infinity,
                               decoration: BoxDecoration(
-                                color: Color(0xff2AB29D),
+                                color: Color(0xff3A5896),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(15)),
                               ),
                               child: ElevatedButton(
                                 onPressed: () {
-                                  // Navigator.push(
-                                  //   context,
-                                  //   MaterialPageRoute(
-                                  //       builder: (context) => (AfterBookNow())),
-                                  // );
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => (Payment())),
+                                  );
                                 },
                                 style: ElevatedButton.styleFrom(
-                                  primary: Color(0xff2AB29D),
+                                  primary: Color(0xff3A5896),
                                   shape: RoundedRectangleBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(15)),
                                   ),
                                 ),
                                 child: Text(
-                                  "BOOK NOW",
+                                  "View Profile",
                                   style: TextStyle(fontSize: 18),
                                 ),
                               ),
@@ -419,8 +420,7 @@ class _AfterBookNowState extends State<AfterBookNow> {
                                               Radius.circular(15),
                                             ),
                                           ),
-                                          child:
-                                           ElevatedButton(
+                                          child: ElevatedButton(
                                             onPressed: () {
                                               Navigator.push(
                                                 context,

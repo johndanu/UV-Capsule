@@ -20,88 +20,88 @@ class _SearchResultState extends State<SearchResult> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyAppBar(),
-      body: Padding(
-        padding: const EdgeInsets.all(24.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 60),
-              child: RichText(
-                text: const TextSpan(
-                  style: TextStyle(fontSize: 13.0, color: Colors.black),
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: 'Home/',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w600, color: Colors.blue),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 50),
+                child: RichText(
+                  text: const TextSpan(
+                    style: TextStyle(fontSize: 13.0, color: Colors.black),
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: 'Home/',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600, color: Colors.blue),
+                      ),
+                      TextSpan(
+                        text: 'Search Results',
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 50,
+              ),
+              Container(
+                child: Column(
+                  children: [
+                    const Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Search Results",
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w600),
+                        ),
+                        Text(
+                          "1 Result Found",
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.w400),
+                        )
+                      ],
                     ),
-                    TextSpan(
-                      text: 'Search Results',
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "${widget.selectedType} : ${widget.searchValue}",
+                          style: const TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.w400),
+                        ),
+                        Row(
+                          children: [
+                            const Text(
+                              "Groups by Hospitals",
+                              style: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.w400),
+                            ),
+                            Transform.scale(
+                              scale: 0.6,
+                              child: Switch(
+                                value: switchValue,
+                                onChanged: (value) {
+                                  setState(() {
+                                    switchValue = value;
+                                  });
+                                },
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
                     ),
                   ],
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 50,
-            ),
-            Container(
-              child: Column(
-                children: [
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Search Results",
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w600),
-                      ),
-                      Text(
-                        "1 Result Found",
-                        style: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.w400),
-                      )
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "${widget.selectedType} : ${widget.searchValue}",
-                        style: const TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.w400),
-                      ),
-                      Row(
-                        children: [
-                          const Text(
-                            "Groups by Hospitals",
-                            style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.w400),
-                          ),
-                          Transform.scale(
-                            scale: 0.6,
-                            child: Switch(
-                              value: switchValue,
-                              onChanged: (value) {
-                                setState(() {
-                                  switchValue = value;
-                                });
-                              },
-                            ),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ],
+              const SizedBox(
+                height: 30,
               ),
-            ),
-            const SizedBox(
-              height: 50,
-            ),
-            Expanded(
-              child: Container(
+              Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
@@ -110,7 +110,7 @@ class _SearchResultState extends State<SearchResult> {
                   children: [
                     Container(
                       child: Padding(
-                        padding: const EdgeInsets.all(24.0),
+                        padding: const EdgeInsets.all(16.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -160,7 +160,10 @@ class _SearchResultState extends State<SearchResult> {
                                                 Border.all(color: Colors.grey)),
                                         child: const Padding(
                                           padding: EdgeInsets.all(8.0),
-                                          child: Text("View\nProfile"),
+                                          child: Text(
+                                            "View\nProfile",
+                                            style: TextStyle(fontSize: 13),
+                                          ),
                                         ),
                                       )
                                     ],
@@ -168,16 +171,10 @@ class _SearchResultState extends State<SearchResult> {
                                 )
                               ],
                             ),
-                            const SizedBox(
-                              height: 10,
-                            ),
                             Text(
                               "DR ${widget.searchValue}",
                               style: const TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.w600),
-                            ),
-                            const SizedBox(
-                              height: 10,
                             ),
                             const Row(
                               children: [
@@ -200,7 +197,7 @@ class _SearchResultState extends State<SearchResult> {
                       color: Colors.grey,
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(24.0),
+                      padding: const EdgeInsets.all(16.0),
                       child: Container(
                         width: double.infinity,
                         decoration: BoxDecoration(
@@ -208,7 +205,7 @@ class _SearchResultState extends State<SearchResult> {
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(8))),
                         child: Padding(
-                          padding: const EdgeInsets.all(32.0),
+                          padding: const EdgeInsets.all(16.0),
                           child: Column(
                             children: [
                               Icon(
@@ -280,9 +277,9 @@ class _SearchResultState extends State<SearchResult> {
                     )
                   ],
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );

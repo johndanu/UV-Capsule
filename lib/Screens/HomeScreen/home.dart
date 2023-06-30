@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     children: [
                       TextSpan(
-                        text: 'Hi AATHAV ',
+                        text: 'Hi Siva ',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
@@ -68,7 +68,6 @@ class _HomePageState extends State<HomePage> {
               SizedBox(height: 16),
               GestureDetector(
                 onTap: () {
-                  
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -95,10 +94,10 @@ class _HomePageState extends State<HomePage> {
                         padding: EdgeInsets.all(8),
                         child: Center(
                           child: Text(
-                            'Image 1',
+                            'Order via your Prescription',
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 16,
+                              fontSize: 17,
                             ),
                           ),
                         ),
@@ -138,10 +137,10 @@ class _HomePageState extends State<HomePage> {
                         padding: EdgeInsets.all(8),
                         child: Center(
                           child: Text(
-                            'Image 2',
+                            'eChanneling',
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 16,
+                              fontSize: 17,
                             ),
                           ),
                         ),
@@ -152,12 +151,12 @@ class _HomePageState extends State<HomePage> {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => EChannelling(),
-                    ),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) => EChannelling(),
+                  //   ),
+                  // );
                 },
                 child: Container(
                   margin: EdgeInsets.only(bottom: 16),
@@ -181,10 +180,10 @@ class _HomePageState extends State<HomePage> {
                         padding: EdgeInsets.all(8),
                         child: Center(
                           child: Text(
-                            'Image 3',
+                            'Fitness tracker',
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 16,
+                              fontSize: 17,
                             ),
                           ),
                         ),

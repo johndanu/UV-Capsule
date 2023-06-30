@@ -18,36 +18,36 @@ class _OrderPlacedState extends State<OrderPlaced> {
   ];
 
   final List<List<String>> tableData = [
-    ['Cell 1', 'Cell 2', 'Cell 3'],
-    ['Cell 4', 'Cell 5', 'Cell 6'],
-    ['Cell 7', 'Cell 8', 'Cell 9'],
-    ['Cell 10', 'Cell 11', 'Cell 12'],
+    ['Medicine', 'Tablets', 'Price'],
+    ['Acetaminophe ', '28', '560.00'],
+    ['Amoxicilli', '14', '630.00'],
+    ['Ibuprofen ', '07', '714.00'],
   ];
 
   int _currentStep = 0;
 
   List<Step> _stepperList = [
-    Step(
+    const Step(
       title: Text('Order Placing'),
       content: Text('Step 1 content'),
     ),
-    Step(
+    const Step(
       title: Text('Waiting for merchant confirmation'),
       content: Text('Step 2 content'),
     ),
-    Step(
+    const Step(
       title: Text('Confirm and pay'),
       content: Text('Step 3 content'),
     ),
-    Step(
+    const Step(
       title: Text('Ready for delivery'),
       content: Text('Step 4 content'),
     ),
-    Step(
+    const Step(
       title: Text('On delivery'),
       content: Text('Step 5 content'),
     ),
-    Step(
+    const Step(
       title: Text('Order finished'),
       content: Text('Step 6 content'),
     ),
@@ -63,16 +63,16 @@ class _OrderPlacedState extends State<OrderPlaced> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 50),
+              const SizedBox(height: 50),
               RichText(
-                text: TextSpan(
+                text: const TextSpan(
                   style: TextStyle(
-                    fontSize: 23.0,
+                    fontSize: 25.0,
                     color: Colors.black,
                   ),
                   children: [
                     TextSpan(
-                      text: 'Hi AATHAV ',
+                      text: 'Hi Siva ! ',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
@@ -86,16 +86,19 @@ class _OrderPlacedState extends State<OrderPlaced> {
                     TextSpan(
                       text: '\n\nOrder Overview',
                       style:
-                          TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
+                          TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
                     ),
                   ],
                 ),
               ),
+              const SizedBox(
+                height: 10,
+              ),
               Container(
                 child: GridView.builder(
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  physics: const NeverScrollableScrollPhysics(),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
@@ -114,30 +117,117 @@ class _OrderPlacedState extends State<OrderPlaced> {
                   },
                 ),
               ),
-              Container(
-                  // Rest of your code
+
+              const SizedBox(height: 30),
+              Row(
+                children: [
+                  Text(
+                    "Order ID - ",
+                    style: TextStyle(
+                      fontSize: 14,
+                    ),
+                    textAlign: TextAlign.left,
                   ),
-              SizedBox(height: 30),
-              Text(
-                  "Order ID - #546-CY\nOrder date - 10th Jan 2023\nQuantity - For one month\nOrder Value -  LKR 9,450.00"),
-              SizedBox(
+                  Center(
+                    child: Text(
+                      "#546-CY",
+                      style: TextStyle(
+                        fontSize: 14,
+                      ),
+                      textAlign: TextAlign.end,
+                    ),
+                  )
+                ],
+              ),
+              Row(
+                children: [
+                  Text(
+                    "date - ",
+                    style: TextStyle(
+                      fontSize: 14,
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
+                  Center(
+                    child: Text(
+                      "10th Jan 2023",
+                      style: TextStyle(
+                        fontSize: 14,
+                      ),
+                      textAlign: TextAlign.end,
+                    ),
+                  )
+                ],
+              ),
+              Row(
+                children: [
+                  Text(
+                    "Quantity - ",
+                    style: TextStyle(
+                      fontSize: 14,
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
+                  Center(
+                    child: Text(
+                      "For one month",
+                      style: TextStyle(
+                        fontSize: 14,
+                      ),
+                      textAlign: TextAlign.end,
+                    ),
+                  )
+                ],
+              ),
+              Row(
+                children: [
+                  Text(
+                    "Order Value -  ",
+                    style: TextStyle(
+                      fontSize: 14,
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
+                  Center(
+                    child: Text(
+                      "LKR 9,450.00",
+                      style: TextStyle(
+                        fontSize: 14,
+                      ),
+                      textAlign: TextAlign.end,
+                    ),
+                  )
+                ],
+              ),
+
+              // Text(
+              //     "Order ID - #546-CY\nOrder date - 10th Jan 2023\nQuantity - For one month\nOrder Value -  LKR 9,450.00",style: TextStyle(),),
+              const SizedBox(
                 height: 10,
               ),
-              SizedBox(
-                height: 10,
-              ),
+
               Container(
                 decoration: BoxDecoration(
-                    color: Color(0xffFFC794),
+                    color: const Color(0xffFFC794),
                     borderRadius: BorderRadius.circular(15)),
                 height: 25,
                 width: 130,
-                child: Center(
+                child: const Center(
                   child: Text(
                     "Order Placed",
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Text(
+                "Order Status",
+                style: TextStyle(fontWeight: FontWeight.w700),
+              ),
+              SizedBox(
+                height: 15,
               ),
               Table(
                 children: List.generate(tableData.length + 1, (rowIndex) {
@@ -148,10 +238,10 @@ class _OrderPlacedState extends State<OrderPlaced> {
                         final cellData = tableData[0][colIndex];
 
                         return Container(
-                          padding: EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(8.0),
                           child: Text(
                             cellData,
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                         );
                       }),
@@ -164,13 +254,14 @@ class _OrderPlacedState extends State<OrderPlaced> {
                         final cellData = tableData[rowIndex - 1][colIndex];
 
                         return Container(
-                          padding: EdgeInsets.all(8.0),
-                          margin:
-                              EdgeInsets.all(4.0), // Add a small margin for gap
-                          decoration: BoxDecoration(color: Color(0xffE0FEF7)),
+                          padding: const EdgeInsets.all(8.0),
+                          margin: const EdgeInsets.all(
+                              4.0), // Add a small margin for gap
+                          decoration:
+                              const BoxDecoration(color: Color(0xffE0FEF7)),
                           child: Text(
                             cellData,
-                            style: TextStyle(color: Colors.black),
+                            style: const TextStyle(color: Colors.black),
                           ),
                         );
                       }),
@@ -178,19 +269,19 @@ class _OrderPlacedState extends State<OrderPlaced> {
                   }
                 }),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 40,
               ),
-              Text(
+              const Text(
                 "Order Status",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Container(
                 width: double.infinity,
-                decoration: BoxDecoration(color: Color(0xffE0FEF7)),
+                decoration: const BoxDecoration(color: Color(0xffE0FEF7)),
                 child: Stepper(
                   currentStep: _currentStep,
                   onStepContinue: () {
@@ -210,11 +301,11 @@ class _OrderPlacedState extends State<OrderPlaced> {
                   steps: _stepperList,
                 ),
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               Container(
                 height: 50,
                 width: double.infinity,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Color(0xff2AB29D),
                   borderRadius: BorderRadius.all(Radius.circular(15)),
                 ),
@@ -226,12 +317,12 @@ class _OrderPlacedState extends State<OrderPlaced> {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Color(0xff2AB29D),
-                    shape: RoundedRectangleBorder(
+                    primary: const Color(0xff2AB29D),
+                    shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(15)),
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     "PAY NOW",
                     style: TextStyle(fontSize: 18),
                   ),
@@ -241,7 +332,7 @@ class _OrderPlacedState extends State<OrderPlaced> {
           ),
         ),
       ),
-      bottomNavigationBar: MyBottomBar(),
+      bottomNavigationBar: const MyBottomBar(),
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:capsule/Screens/homeScreen.dart';
 import 'package:capsule/Screens/orderPlaced.dart';
 import 'package:capsule/widgets/appbar.dart';
 import 'package:capsule/widgets/myBottomBar.dart';
@@ -25,12 +26,12 @@ class _PrepareOrderState extends State<PrepareOrder> {
               RichText(
                 text: TextSpan(
                   style: TextStyle(
-                    fontSize: 23.0,
+                    fontSize: 25.0,
                     color: Colors.black,
                   ),
                   children: [
                     TextSpan(
-                      text: 'Hi AATHAV ',
+                      text: 'Hi Siva ! ',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
@@ -69,7 +70,7 @@ class _PrepareOrderState extends State<PrepareOrder> {
                 width: double.infinity,
               ),
               SizedBox(
-                height: 50,
+                height: 70,
               ),
               Container(
                 height: 50,
@@ -102,7 +103,15 @@ class _PrepareOrderState extends State<PrepareOrder> {
               ),
               Center(
                   child: TextButton(
-                      onPressed: () {}, child: Text("Go To My Orders")))
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => HomeScreen(selectedIndex: 1),
+                          ),
+                        );
+                      },
+                      child: Text("Go To My Orders")))
             ],
           ),
         ),

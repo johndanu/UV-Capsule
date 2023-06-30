@@ -1,4 +1,4 @@
-import 'package:capsule/Screens/homePage.dart';
+import 'package:capsule/Screens/homeScreen.dart';
 import 'package:capsule/widgets/appbar.dart';
 import 'package:flutter/material.dart';
 
@@ -51,6 +51,7 @@ class _CreateProfileState extends State<CreateProfile> {
                   child: TextFormField(
                     decoration: InputDecoration(
                       hintText: 'First Name',
+                      hintStyle: TextStyle(fontWeight: FontWeight.w300),
                       border: InputBorder.none,
                       contentPadding: EdgeInsets.symmetric(horizontal: 20),
                     ),
@@ -70,6 +71,7 @@ class _CreateProfileState extends State<CreateProfile> {
                   child: TextFormField(
                     decoration: InputDecoration(
                       hintText: 'Last Name',
+                      hintStyle: TextStyle(fontWeight: FontWeight.w300),
                       border: InputBorder.none,
                       contentPadding: EdgeInsets.symmetric(horizontal: 20),
                     ),
@@ -88,6 +90,7 @@ class _CreateProfileState extends State<CreateProfile> {
                   ),
                   child: TextFormField(
                     decoration: InputDecoration(
+                      hintStyle: TextStyle(fontWeight: FontWeight.w300),
                       hintText: 'Address',
                       border: InputBorder.none,
                       contentPadding: EdgeInsets.symmetric(horizontal: 20),
@@ -107,6 +110,7 @@ class _CreateProfileState extends State<CreateProfile> {
                   ),
                   child: TextFormField(
                     decoration: InputDecoration(
+                      hintStyle: TextStyle(fontWeight: FontWeight.w300),
                       hintText: 'Age',
                       border: InputBorder.none,
                       contentPadding: EdgeInsets.symmetric(horizontal: 20),
@@ -125,6 +129,7 @@ class _CreateProfileState extends State<CreateProfile> {
                   ),
                   child: TextFormField(
                     decoration: InputDecoration(
+                      hintStyle: TextStyle(fontWeight: FontWeight.w300),
                       hintText: 'Contact Number',
                       border: InputBorder.none,
                       contentPadding: EdgeInsets.symmetric(horizontal: 20),
@@ -152,6 +157,8 @@ class _CreateProfileState extends State<CreateProfile> {
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             IconButton(
                               onPressed: () {
@@ -159,14 +166,14 @@ class _CreateProfileState extends State<CreateProfile> {
                               },
                               icon: Icon(
                                 Icons.male,
-                                size: 60,
+                                size: 40,
                                 color: selectedRadio == 1
                                     ? Color(0xff385592)
                                     : Colors.black,
                               ),
                             ),
                             SizedBox(
-                              height: 10,
+                              height: 5,
                             ),
                             Text(
                               "Male",
@@ -199,6 +206,8 @@ class _CreateProfileState extends State<CreateProfile> {
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             IconButton(
                               onPressed: () {
@@ -206,14 +215,14 @@ class _CreateProfileState extends State<CreateProfile> {
                               },
                               icon: Icon(
                                 Icons.female_outlined,
-                                size: 60,
+                                size: 40,
                                 color: selectedRadio == 2
                                     ? Color(0xff385592)
                                     : Colors.black,
                               ),
                             ),
                             SizedBox(
-                              height: 10,
+                              height: 5,
                             ),
                             Text(
                               "Female",
