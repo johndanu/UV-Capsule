@@ -224,11 +224,12 @@ class _AfterBookNowState extends State<AfterBookNow> {
                               child: ElevatedButton(
                                 onPressed: () {
                                   Navigator.pushReplacement(
-                   context,
-                   MaterialPageRoute(
-                     builder: (context) => HomeScreen(selectedIndex: 2),
-                   ),
-                 );
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          HomeScreen(selectedIndex: 2),
+                                    ),
+                                  );
                                 },
                                 style: ElevatedButton.styleFrom(
                                   primary: Color(0xff3A5896),
@@ -299,6 +300,7 @@ class _AfterBookNowState extends State<AfterBookNow> {
                     child: Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey, width: 1),
                         color: Color(0xffE0FEF7),
                         borderRadius: BorderRadius.circular(8),
                       ),
@@ -392,6 +394,7 @@ class _AfterBookNowState extends State<AfterBookNow> {
                                             Icon(
                                               Icons.info,
                                               color: Colors.blue,
+                                              size: 15,
                                             ),
                                           ],
                                         ),
@@ -414,8 +417,8 @@ class _AfterBookNowState extends State<AfterBookNow> {
                                           height: 10,
                                         ),
                                         Container(
-                                          height: 50,
-                                          width: 150,
+                                          height: 40,
+                                          width: 130,
                                           decoration: BoxDecoration(
                                             color: Color(0xff2AB29D),
                                             borderRadius: BorderRadius.all(
@@ -447,7 +450,7 @@ class _AfterBookNowState extends State<AfterBookNow> {
                                             ),
                                             child: Text(
                                               "BOOK NOW",
-                                              style: TextStyle(fontSize: 18),
+                                              style: TextStyle(fontSize: 14),
                                             ),
                                           ),
                                         ),
@@ -477,8 +480,8 @@ class _AfterBookNowState extends State<AfterBookNow> {
                                         Text(
                                           item['location'],
                                           style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w500,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400,
                                           ),
                                         ),
                                         SizedBox(
@@ -519,6 +522,7 @@ class _AfterBookNowState extends State<AfterBookNow> {
                                             ),
                                             Icon(
                                               Icons.info,
+                                              size: 15,
                                               color: Colors.blue,
                                             ),
                                           ],
@@ -542,8 +546,8 @@ class _AfterBookNowState extends State<AfterBookNow> {
                                           height: 10,
                                         ),
                                         Container(
-                                          height: 50,
-                                          width: 150,
+                                          height: 40,
+                                          width: 130,
                                           decoration: BoxDecoration(
                                             color: Color(0xff2AB29D),
                                             borderRadius: BorderRadius.all(
@@ -575,7 +579,7 @@ class _AfterBookNowState extends State<AfterBookNow> {
                                             ),
                                             child: Text(
                                               "BOOK NOW",
-                                              style: TextStyle(fontSize: 18),
+                                              style: TextStyle(fontSize: 14),
                                             ),
                                           ),
                                         ),

@@ -1,4 +1,6 @@
+import 'package:capsule/Screens/afterBookNow.dart';
 import 'package:capsule/Screens/loadingPage.dart';
+import 'package:capsule/Screens/orderPlaced.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,9 +16,11 @@ class MyApp extends StatelessWidget {
         title: 'Loading Page Example',
         theme: ThemeData(
           primarySwatch: Colors.blue,
-     
         ),
-        home: LoadingPage(),
+        home: AfterBookNow(
+          searchValue: '',
+          selectedType: '',
+        ),
       ),
     );
   }

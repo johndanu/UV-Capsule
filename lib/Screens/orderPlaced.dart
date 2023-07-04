@@ -54,6 +54,8 @@ class _OrderPlacedState extends State<OrderPlaced> {
 
   @override
   Widget build(BuildContext context) {
+    bool step1 = true;
+    bool step2 = false;
     return Scaffold(
       appBar: MyAppBar(),
       body: SingleChildScrollView(
@@ -279,15 +281,346 @@ class _OrderPlacedState extends State<OrderPlaced> {
                 height: 20,
               ),
               Container(
-                width: double.infinity,
-                decoration: const BoxDecoration(color: Color(0xffE0FEF7)),
-                child: Stepper(
-                  currentStep: _currentStep,
-                  onStepContinue: null, // Removed onStepContinue callback
-                  onStepCancel: null, // Removed onStepCancel callback
-                  steps: _stepperList,
-                ),
-              ),
+                  width: double.infinity,
+                  decoration: const BoxDecoration(color: Color(0xffE0FEF7)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(32.0),
+                    child: Column(
+                      children: [
+                        Container(
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Column(
+                                children: [
+                                  step2 == false
+                                      ? CircleAvatar(
+                                          backgroundColor: Color(0xff18645B),
+                                          radius: 13,
+                                          child: Icon(
+                                            Icons.done,
+                                            color: Colors.white,
+                                            size: 18,
+                                          ),
+                                        )
+                                      : Container(
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            border: Border.all(
+                                              color: Color(0xff2AB49E),
+                                              width: 2.0,
+                                            ),
+                                          ),
+                                          child: CircleAvatar(
+                                            backgroundColor: Colors.white,
+                                            foregroundColor: Color(0xff2AB49E),
+                                            radius: 15,
+                                            child: Icon(
+                                              Icons.circle,
+                                              color: Color(0xff2AB49E),
+                                              size: 10,
+                                            ),
+                                          ),
+                                        ),
+                                  step2 == false
+                                      ? Container(
+                                          width: 2,
+                                          height: 40,
+                                          color: Color(0xff18645B),
+                                        )
+                                      : Container(
+                                          width: 2,
+                                          height: 40,
+                                          color: Colors.grey,
+                                        )
+                                ],
+                              ),
+                              SizedBox(width: 15),
+                              Text(
+                                "Order Placing",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w600, fontSize: 15),
+                              )
+                            ],
+                          ),
+                        ),
+                        Container(
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Column(
+                                children: [
+                                  step1 == false
+                                      ? CircleAvatar(
+                                          backgroundColor: Color(0xff18645B),
+                                          radius: 15,
+                                          child: Icon(
+                                            Icons.done,
+                                            color: Colors.white,
+                                            size: 15,
+                                          ),
+                                        )
+                                      : Container(
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            border: Border.all(
+                                              color: Color(0xff2AB49E),
+                                              width: 2.0,
+                                            ),
+                                          ),
+                                          child: CircleAvatar(
+                                            backgroundColor: Colors.white,
+                                            foregroundColor: Color(0xff2AB49E),
+                                            radius: 10,
+                                            child: Icon(
+                                              Icons.circle,
+                                              color: Color(0xff2AB49E),
+                                              size: 10,
+                                            ),
+                                          ),
+                                        ),
+                                  step1 == false
+                                      ? Container(
+                                          width: 2,
+                                          height: 40,
+                                          color: Color(0xff18645B),
+                                        )
+                                      : Container(
+                                          width: 2,
+                                          height: 40,
+                                          color: Colors.grey,
+                                        )
+                                ],
+                              ),
+                              SizedBox(width: 15),
+                              Text(
+                                "Waiting for merchant confirmation",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w600, fontSize: 15),
+                              )
+                            ],
+                          ),
+                        ),
+                        Container(
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Column(
+                                children: [
+                                  step1 == false
+                                      ? CircleAvatar(
+                                          backgroundColor: Color(0xff18645B),
+                                          radius: 10,
+                                          child: Icon(
+                                            Icons.done,
+                                            color: Colors.white,
+                                            size: 15,
+                                          ),
+                                        )
+                                      : Container(
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            border: Border.all(
+                                              color: Color(0xff2AB49E),
+                                              width: 2.0,
+                                            ),
+                                          ),
+                                          child: CircleAvatar(
+                                            backgroundColor: Colors.white,
+                                            foregroundColor: Color(0xff2AB49E),
+                                            radius: 10,
+                                            child: Icon(
+                                              Icons.circle,
+                                              color: Color(0xff2AB49E),
+                                              size: 10,
+                                            ),
+                                          ),
+                                        ),
+                                  step1 == false
+                                      ? Container(
+                                          width: 2,
+                                          height: 40,
+                                          color: Color(0xff18645B),
+                                        )
+                                      : Container(
+                                          width: 2,
+                                          height: 40,
+                                          color: Colors.grey,
+                                        )
+                                ],
+                              ),
+                              SizedBox(width: 15),
+                              Text(
+                                "Order Placing",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w600, fontSize: 15),
+                              )
+                            ],
+                          ),
+                        ),
+                        Container(
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Column(
+                                children: [
+                                  step1 == false
+                                      ? CircleAvatar(
+                                          backgroundColor: Color(0xff18645B),
+                                          radius: 10,
+                                          child: Icon(
+                                            Icons.done,
+                                            color: Colors.white,
+                                            size: 15,
+                                          ),
+                                        )
+                                      : Container(
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            border: Border.all(
+                                              color: Color(0xff2AB49E),
+                                              width: 2.0,
+                                            ),
+                                          ),
+                                          child: CircleAvatar(
+                                            backgroundColor: Colors.white,
+                                            foregroundColor: Color(0xff2AB49E),
+                                            radius: 10,
+                                            child: Icon(
+                                              Icons.circle,
+                                              color: Color(0xff2AB49E),
+                                              size: 10,
+                                            ),
+                                          ),
+                                        ),
+                                  step1 == false
+                                      ? Container(
+                                          width: 2,
+                                          height: 40,
+                                          color: Color(0xff18645B),
+                                        )
+                                      : Container(
+                                          width: 2,
+                                          height: 40,
+                                          color: Colors.grey,
+                                        )
+                                ],
+                              ),
+                              SizedBox(width: 15),
+                              Text(
+                                "Ready for delivery",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w600, fontSize: 15),
+                              )
+                            ],
+                          ),
+                        ),
+                        Container(
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Column(
+                                children: [
+                                  step1 == false
+                                      ? CircleAvatar(
+                                          backgroundColor: Color(0xff18645B),
+                                          radius: 10,
+                                          child: Icon(
+                                            Icons.done,
+                                            color: Colors.white,
+                                            size: 15,
+                                          ),
+                                        )
+                                      : Container(
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            border: Border.all(
+                                              color: Color(0xff2AB49E),
+                                              width: 2.0,
+                                            ),
+                                          ),
+                                          child: CircleAvatar(
+                                            backgroundColor: Colors.white,
+                                            foregroundColor: Color(0xff2AB49E),
+                                            radius: 10,
+                                            child: Icon(
+                                              Icons.circle,
+                                              color: Color(0xff2AB49E),
+                                              size: 10,
+                                            ),
+                                          ),
+                                        ),
+                                  step1 == false
+                                      ? Container(
+                                          width: 2,
+                                          height: 40,
+                                          color: Color(0xff18645B),
+                                        )
+                                      : Container(
+                                          width: 2,
+                                          height: 40,
+                                          color: Colors.grey,
+                                        )
+                                ],
+                              ),
+                              SizedBox(width: 15),
+                              Text(
+                                "On delivery",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w600, fontSize: 15),
+                              )
+                            ],
+                          ),
+                        ),
+                        Container(
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Column(
+                                children: [
+                                  step1 == false
+                                      ? CircleAvatar(
+                                          backgroundColor: Color(0xff18645B),
+                                          radius: 10,
+                                          child: Icon(
+                                            Icons.done,
+                                            color: Colors.white,
+                                            size: 15,
+                                          ),
+                                        )
+                                      : Container(
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            border: Border.all(
+                                              color: Color(0xff2AB49E),
+                                              width: 2.0,
+                                            ),
+                                          ),
+                                          child: CircleAvatar(
+                                            backgroundColor: Colors.white,
+                                            foregroundColor: Color(0xff2AB49E),
+                                            radius: 10,
+                                            child: Icon(
+                                              Icons.circle,
+                                              color: Color(0xff2AB49E),
+                                              size: 10,
+                                            ),
+                                          ),
+                                        ),
+                                ],
+                              ),
+                              SizedBox(width: 15),
+                              Text(
+                                "Order finished",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w600, fontSize: 15),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  )),
               const SizedBox(height: 30),
               Container(
                 height: 50,
