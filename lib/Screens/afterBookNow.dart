@@ -558,9 +558,9 @@ class _AfterBookNowState extends State<AfterBookNow> {
                                                 context,
                                                 MaterialPageRoute(
                                                   builder: (context) =>
-                                                      (AfterBookNow(
+                                                      (PlaceAppointment(
                                                     searchValue:
-                                                        widget.selectedType,
+                                                        widget.searchValue,
                                                     selectedType:
                                                         widget.selectedType,
                                                   )),
