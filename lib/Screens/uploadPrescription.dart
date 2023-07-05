@@ -18,165 +18,169 @@ class _UploadPrescriptionState extends State<UploadPrescription> {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
-          child: Column(
-            children: [
-              Text(
-                'Simply upload your prescription or photos to get your medicine to your door step',
-                style: TextStyle(fontSize: 15),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Container(
-                child: Stack(
-                  children: [
-                    Image.asset("assets/images/prescription.png"),
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
-                      child: Text(
-                        "Upload your prescription /\n Images",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                    Center(
-                      child: Padding(
-                        padding: EdgeInsets.only(top: 160),
-                        child: IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.add_circle,
-                            size: 60,
-                          ),
+          child: Padding(
+            padding: const EdgeInsets.only(top: 40),
+            child: Column(
+              children: [
+                Text(
+                  'Simply upload your prescription or photos to get your medicine to your door step',
+                  style: TextStyle(fontSize: 15),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  child: Stack(
+                    children: [
+                      Image.asset("assets/images/prescription.png"),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
+                        child: Text(
+                          "Upload your prescription /\n Images",
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.w600),
                         ),
                       ),
-                    )
-                  ],
-                ),
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(8)),
-                height: 200,
-                width: double.infinity,
-              ),
-              SizedBox(
-                height: 50,
-              ),
-              Form(
-                child: TextFormField(
-                  maxLines: 4,
-                  decoration: InputDecoration(
-                    hintText: 'Any Remark',
-                    hintStyle: TextStyle(fontWeight: FontWeight.w300),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
-                    ),
+                      Center(
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 160),
+                          child: IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.add_circle,
+                              size: 60,
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
                   ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter a remark';
-                    }
-                    return null;
-                  },
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(8)),
+                  height: 200,
+                  width: double.infinity,
                 ),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Auto fill by Profile details"),
-                  Switch(
-                    value: toggleValue,
-                    onChanged: (value) {
-                      setState(() {
-                        toggleValue = value;
-                      });
+                SizedBox(
+                  height: 50,
+                ),
+                Form(
+                  child: TextFormField(
+                    maxLines: 4,
+                    decoration: InputDecoration(
+                      hintText: 'Any Remark',
+                      hintStyle: TextStyle(fontWeight: FontWeight.w300),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey),
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please enter a remark';
+                      }
+                      return null;
                     },
                   ),
-                ],
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Form(
-                child: Column(
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    TextFormField(
-                      decoration: InputDecoration(
-                        labelText: 'Customer Name',
-                        hintStyle: TextStyle(fontWeight: FontWeight.w300),
-                        border: OutlineInputBorder(),
-                      ),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Please enter the customer name';
-                        }
-                        return null;
-                      },
-                    ),
-                    SizedBox(height: 15),
-                    TextFormField(
-                      keyboardType: TextInputType.phone,
-                      decoration: InputDecoration(
-                        labelText: 'Customer Phone',
-                        hintStyle: TextStyle(fontWeight: FontWeight.w300),
-                        border: OutlineInputBorder(),
-                      ),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Please enter the customer phone';
-                        }
-                        return null;
-                      },
-                    ),
-                    SizedBox(height: 20),
-                    TextFormField(
-                      decoration: InputDecoration(
-                        labelText: 'Delivery Address',
-                        hintStyle: TextStyle(fontWeight: FontWeight.w300),
-                        border: OutlineInputBorder(),
-                      ),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Please enter the delivery address';
-                        }
-                        return null;
+                    Text("Auto fill by Profile details"),
+                    Switch(
+                      value: toggleValue,
+                      onChanged: (value) {
+                        setState(() {
+                          toggleValue = value;
+                        });
                       },
                     ),
                   ],
                 ),
-              ),
-              SizedBox(
-                height: 40,
-              ),
-              Container(
-                height: 50,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Color(0xff2AB29D),
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                SizedBox(
+                  height: 10,
                 ),
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => (PrepareOrder())),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: Color(0xff2AB29D),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(15)),
+                Form(
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        decoration: InputDecoration(
+                          labelText: 'Customer Name',
+                          hintStyle: TextStyle(fontWeight: FontWeight.w300),
+                          border: OutlineInputBorder(),
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Please enter the customer name';
+                          }
+                          return null;
+                        },
+                      ),
+                      SizedBox(height: 15),
+                      TextFormField(
+                        keyboardType: TextInputType.phone,
+                        decoration: InputDecoration(
+                          labelText: 'Customer Phone',
+                          hintStyle: TextStyle(fontWeight: FontWeight.w300),
+                          border: OutlineInputBorder(),
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Please enter the customer phone';
+                          }
+                          return null;
+                        },
+                      ),
+                      SizedBox(height: 20),
+                      TextFormField(
+                        decoration: InputDecoration(
+                          labelText: 'Delivery Address',
+                          hintStyle: TextStyle(fontWeight: FontWeight.w300),
+                          border: OutlineInputBorder(),
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Please enter the delivery address';
+                          }
+                          return null;
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 40,
+                ),
+                Container(
+                  height: 50,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Color(0xff2AB29D),
+                    borderRadius: BorderRadius.all(Radius.circular(15)),
+                  ),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => (PrepareOrder())),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: Color(0xff2AB29D),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(15)),
+                      ),
+                    ),
+                    child: Text(
+                      "PLACE THE ORDERS",
+                      style: TextStyle(fontSize: 18),
                     ),
                   ),
-                  child: Text(
-                    "PLACE THE ORDERS",
-                    style: TextStyle(fontSize: 18),
-                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

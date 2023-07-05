@@ -229,7 +229,7 @@ class _SearchResultState extends State<SearchResult> {
                                     TextSpan(
                                       text: '\nKarapitiya',
                                       style: TextStyle(
-                                          fontStyle: FontStyle.italic,
+                                       
                                           fontSize: 18),
                                     ),
                                   ],

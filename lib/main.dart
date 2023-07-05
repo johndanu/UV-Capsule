@@ -12,16 +12,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Loading Page Example',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: AfterBookNow(
-          searchValue: '',
-          selectedType: '',
-        ),
-      ),
+          debugShowCheckedModeBanner: false,
+          title: 'Loading Page Example',
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+          home: OrderPlaced()),
     );
   }
 }

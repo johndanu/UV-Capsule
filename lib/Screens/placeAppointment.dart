@@ -94,7 +94,7 @@ class _PlaceAppointmentState extends State<PlaceAppointment> {
                                   TextSpan(
                                     text: '\nCARDIO THORACIC SURGEON ',
                                     style: TextStyle(
-                                        fontStyle: FontStyle.italic,
+                                      
                                         fontSize: 18),
                                   ),
                                 ],
@@ -224,7 +224,7 @@ class _PlaceAppointmentState extends State<PlaceAppointment> {
                     ),
                   ),
                   child: Text(
-                    "BOOK NOW",
+                    "Pay Now",
                     style: TextStyle(fontSize: 18),
                   ),
                 ),

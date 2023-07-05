@@ -203,9 +203,7 @@ class _AfterBookNowState extends State<AfterBookNow> {
                                   ),
                                   TextSpan(
                                     text: '\nCARDIO THORACIC SURGEON ',
-                                    style: TextStyle(
-                                        fontStyle: FontStyle.italic,
-                                        fontSize: 18),
+                                    style: TextStyle(fontSize: 18),
                                   ),
                                 ],
                               ),

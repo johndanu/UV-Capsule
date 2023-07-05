@@ -111,7 +111,10 @@ class _PrepareOrderState extends State<PrepareOrder> {
                           ),
                         );
                       },
-                      child: Text("Go To My Orders")))
+                      child: Text(
+                        "Go To My Orders",
+                        style: TextStyle(color: Color(0xff2AB29D)),
+                      )))
             ],
           ),
         ),
