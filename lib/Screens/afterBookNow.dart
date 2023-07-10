@@ -21,7 +21,7 @@ class _AfterBookNowState extends State<AfterBookNow> {
     {
       'date': 'Friday, 19th May 2023',
       'sessions': '2 Sessions',
-      'icon': Icons.sim_card,
+      'image': "assets/images/Esim.png",
       'location': 'Coop channelling\nCenter-Karapittiya',
       'locationName': 'Karapitiya',
       'time': '6:00 AM (Morning)',
@@ -34,7 +34,7 @@ class _AfterBookNowState extends State<AfterBookNow> {
     {
       'date': 'Saturday, 20th May 2023',
       'sessions': '1 Session',
-      'icon': Icons.sim_card,
+      'image': "assets/images/Esim.png",
       'location': 'Medical Center-Galle',
       'locationName': 'Galle',
       'time': '10:00 AM (Morning)',
@@ -47,7 +47,7 @@ class _AfterBookNowState extends State<AfterBookNow> {
     {
       'date': 'Friday, 19th May 2023',
       'sessions': '2 Sessions',
-      'icon': Icons.sim_card,
+      'image': "assets/images/Esim.png",
       'location': 'Coop channelling\nCenter-Karapittiya',
       'locationName': 'Karapitiya',
       'time': '6:00 AM (Morning)',
@@ -183,10 +183,7 @@ class _AfterBookNowState extends State<AfterBookNow> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Icon(
-                              Icons.sim_card,
-                              size: 30,
-                            ),
+                            Container(child: Image.asset('assets/images/Esim.png', fit: BoxFit.cover),),
                             SizedBox(
                               height: 10,
                             ),
@@ -341,10 +338,7 @@ class _AfterBookNowState extends State<AfterBookNow> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Center(
-                                          child: Icon(
-                                            item['icon'],
-                                            size: 30,
-                                          ),
+                                          child:  Container(child: Image.asset( item['image'], fit: BoxFit.cover),),
                                         ),
                                         Text(
                                           item['location'],
@@ -470,10 +464,7 @@ class _AfterBookNowState extends State<AfterBookNow> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Center(
-                                          child: Icon(
-                                            item['icon'],
-                                            size: 30,
-                                          ),
+                                          child: Container(child: Image.asset( item['image'], fit: BoxFit.cover),),
                                         ),
                                         Text(
                                           item['location'],

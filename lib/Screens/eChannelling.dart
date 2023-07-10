@@ -1,4 +1,4 @@
-import 'package:auto_size_text/auto_size_text.dart';
+import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 import 'package:capsule/Screens/searchResult.dart';
 import 'package:capsule/widgets/appbar.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +14,7 @@ class _EChannellingState extends State<EChannelling> {
   int _selectedType = 0; // Initial selection index
 
   List<String> doctorsList = [
-    'john',
+    'John',
     'Maria',
     'Nushi',
     'Mohammed',
@@ -24,7 +24,6 @@ class _EChannellingState extends State<EChannelling> {
   List<String> filteredDoctorsList = [];
 
   TextEditingController _searchController = TextEditingController();
-  bool showSuggestions = false; // Track the visibility of auto-suggestions
 
   @override
   void initState() {
@@ -55,7 +54,6 @@ class _EChannellingState extends State<EChannelling> {
   void _selectName(String name) {
     setState(() {
       _searchController.text = name;
-      filteredDoctorsList.clear();
     });
   }
 
@@ -72,6 +70,36 @@ class _EChannellingState extends State<EChannelling> {
     }
   }
 
+  Widget buildRadioButton(String text, int value) {
+    return Expanded(
+      child: GestureDetector(
+        onTap: () {
+          setState(() {
+            _selectedType = value;
+          });
+        },
+        child: Column(
+          children: [
+            Radio<int>(
+              value: value,
+              groupValue: _selectedType,
+              onChanged: (int? newValue) {
+                setState(() {
+                  _selectedType = newValue!;
+                });
+              },
+            ),
+            Text(
+              text,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,8 +113,7 @@ class _EChannellingState extends State<EChannelling> {
                 Container(
                   width: double.infinity,
                   height: 500, // Adjust the desired height of the image
-                  child: Image.asset('assets/images/eChannelling.png',
-                      fit: BoxFit.cover),
+                  child: Image.asset('assets/images/eChannelling.png', fit: BoxFit.cover),
                 ),
                 Positioned(
                   bottom: 10,
@@ -118,13 +145,14 @@ class _EChannellingState extends State<EChannelling> {
             ),
             Row(
               children: [
-                Expanded(
+                Flexible(
+                  flex: 1,
                   child: RadioListTile<int>(
-                    title: AutoSizeText(
+                    title: Text(
                       'Doctors',
                       maxLines: 1,
-                      minFontSize: 10,
                       overflow: TextOverflow.ellipsis,
+                      style: TextStyle(fontSize: 13),
                     ),
                     value: 0,
                     groupValue: _selectedType,
@@ -133,14 +161,16 @@ class _EChannellingState extends State<EChannelling> {
                         _selectedType = value!;
                       });
                     },
+                    contentPadding: EdgeInsets.zero, // Remove padding around the text
                   ),
                 ),
-                Expanded(
+                Flexible(
+                  flex: 1,
                   child: RadioListTile<int>(
-                    title: AutoSizeText(
+                    title: Text(
                       'Specialization',
+                      style: TextStyle(fontSize: 13),
                       maxLines: 2,
-                      minFontSize: 10,
                       overflow: TextOverflow.ellipsis,
                     ),
                     value: 1,
@@ -150,14 +180,16 @@ class _EChannellingState extends State<EChannelling> {
                         _selectedType = value!;
                       });
                     },
+                    contentPadding: EdgeInsets.zero, // Remove padding around the text
                   ),
                 ),
-                Expanded(
+                Flexible(
+                  flex: 1,
                   child: RadioListTile<int>(
-                    title: AutoSizeText(
+                    title: Text(
                       'Hospital',
+                      style: TextStyle(fontSize: 13),
                       maxLines: 1,
-                      minFontSize: 10,
                       overflow: TextOverflow.ellipsis,
                     ),
                     value: 2,
@@ -167,32 +199,47 @@ class _EChannellingState extends State<EChannelling> {
                         _selectedType = value!;
                       });
                     },
+                    contentPadding: EdgeInsets.zero, // Remove padding around the text
                   ),
                 ),
               ],
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: TextFormField(
+              child: AutoCompleteTextField<String>(
+                key: GlobalKey<AutoCompleteTextFieldState<String>>(),
                 controller: _searchController,
+                suggestions: filteredDoctorsList,
+                clearOnSubmit: false,
                 decoration: InputDecoration(
-                  labelText: 'Search Doctors Name (Max 30 Characters)',
+                  labelText: 'Search ${_getSelectedTypeName(_selectedType)} Name (Max 30 Characters)',
                   labelStyle: TextStyle(fontWeight: FontWeight.w300),
                   border: OutlineInputBorder(),
                 ),
-                onTap: () {
+                itemFilter: (item, query) =>
+                    item.toLowerCase().contains(query.toLowerCase()),
+                itemSorter: (a, b) => a.compareTo(b),
+                itemSubmitted: (item) {
                   setState(() {
-                    showSuggestions = true; // Show auto-suggestions on tap
+                    _searchController.text = item;
                   });
                 },
-                onChanged: (value) {
+                itemBuilder: (context, item) {
+                  return ListTile(
+                    title: Text(item),
+                    onTap: () {
+                      setState(() {
+                        _searchController.text = item;
+                      });
+                    },
+                  );
+                },
+                textChanged: (value) {
                   filterDoctorsList(value);
                 },
               ),
             ),
-            SizedBox(
-              height: 20,
-            ),
+            SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Container(
@@ -227,35 +274,9 @@ class _EChannellingState extends State<EChannelling> {
                 ),
               ),
             ),
-            SizedBox(
-              height: 20,
-            ),
-
-            // Auto-suggestion list
-            if (showSuggestions) // Render the list only if showSuggestions is true
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: filteredDoctorsList.length,
-                  itemBuilder: (context, index) {
-                    final name = filteredDoctorsList[index];
-                    return ListTile(
-                      title: Text(name),
-                      onTap: () {
-                        _selectName(name);
-                      },
-                    );
-                  },
-                ),
-              ),
-
-            SizedBox(
-              height: 20,
-            )
+            SizedBox(height: 20),
           ],
         ),
       ),
     );
-  }
-}
+  }}

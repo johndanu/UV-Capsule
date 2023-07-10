@@ -139,110 +139,108 @@ class _CreateProfileState extends State<CreateProfile> {
                 SizedBox(
                   height: 30,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        setSelectedRadio(1);
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: selectedRadio == 1
-                                ? Color(0xff385592)
-                                : Colors.black,
-                            width: 1.0,
-                          ),
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            IconButton(
-                              onPressed: () {
-                                setSelectedRadio(1);
-                              },
-                              icon: Icon(
-                                Icons.male,
-                                size: 40,
-                                color: selectedRadio == 1
-                                    ? Color(0xff385592)
-                                    : Colors.black,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                              "Male",
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                                color: selectedRadio == 1
-                                    ? Color(0xff385592)
-                                    : Colors.black,
-                              ),
-                            )
-                          ],
-                        ),
-                        height: 100,
-                        width: 100,
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        setSelectedRadio(2);
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: selectedRadio == 2
-                                ? Color(0xff385592)
-                                : Colors.black,
-                            width: 1.0,
-                          ),
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            IconButton(
-                              onPressed: () {
-                                setSelectedRadio(2);
-                              },
-                              icon: Icon(
-                                Icons.female_outlined,
-                                size: 40,
-                                color: selectedRadio == 2
-                                    ? Color(0xff385592)
-                                    : Colors.black,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                              "Female",
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                                color: selectedRadio == 2
-                                    ? Color(0xff385592)
-                                    : Colors.black,
-                              ),
-                            )
-                          ],
-                        ),
-                        height: 100,
-                        width: 100,
-                      ),
-                    ),
-                  ],
+         Row(
+  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  children: [
+    GestureDetector(
+      onTap: () {
+        setSelectedRadio(1);
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: selectedRadio == 1 ? Color(0xff385592) : Colors.transparent,
+            width: 1.0,
+          ),
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        child: Container(
+          color: Color(0xffF5F6F8),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child: IconButton(
+                  onPressed: () {
+                    setSelectedRadio(1);
+                  },
+                  icon: Icon(
+                    Icons.male,
+                    size: 40,
+                    color: selectedRadio == 1 ? Color(0xff385592) : Colors.black26,
+                  ),
                 ),
-                SizedBox(
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Text(
+                "Male",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w400,
+                  color: selectedRadio == 1 ? Color(0xff385592) : Colors.black26,
+                ),
+              )
+            ],
+          ),
+        ),
+        height: 100,
+        width: 100,
+      ),
+    ),
+    GestureDetector(
+      onTap: () {
+        setSelectedRadio(2);
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: Color(0xffF5F6F8),
+          border: Border.all(
+            color: selectedRadio == 2 ? Color(0xff385592) : Colors.transparent,
+            width: 1.0,
+          ),
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          // crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 8),
+              child: IconButton(
+                onPressed: () {
+                  setSelectedRadio(2);
+                },
+                icon: Icon(
+                  Icons.female_outlined,
+                  size: 40,
+                  color: selectedRadio == 2 ? Color(0xff385592) : Colors.black26,
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            Text(
+              "Female",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w400,
+                color: selectedRadio == 2 ? Color(0xff385592) : Colors.black26,
+              ),
+            )
+          ],
+        ),
+        height: 100,
+        width: 100,
+      ),
+    ),
+  ],
+),
+     SizedBox(
                   height: 30,
                 ),
                 Container(

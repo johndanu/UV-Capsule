@@ -24,6 +24,8 @@ class _OrderPlacedState extends State<OrderPlaced> {
     ['Ibuprofen ', '07', '714.00'],
   ];
 
+
+
   @override
   Widget build(BuildContext context) {
     bool step1 = true;
@@ -196,7 +198,7 @@ class _OrderPlacedState extends State<OrderPlaced> {
                 height: 15,
               ),
               Text(
-                "List Of Medicine",
+                "Order Status",
                 style: TextStyle(fontWeight: FontWeight.w700),
               ),
               SizedBox(
@@ -228,7 +230,8 @@ class _OrderPlacedState extends State<OrderPlaced> {
 
                         return Container(
                           padding: const EdgeInsets.all(8.0),
-                          margin: const EdgeInsets.all(4.0),
+                          margin: const EdgeInsets.all(
+                              4.0), // Add a small margin for gap
                           decoration:
                               const BoxDecoration(color: Color(0xffE0FEF7)),
                           child: Text(
@@ -241,36 +244,6 @@ class _OrderPlacedState extends State<OrderPlaced> {
                   }
                 }),
               ),
-              TableCell(
-                child: Container(
-                  padding: const EdgeInsets.all(8.0),
-                  margin: const EdgeInsets.all(4.0),
-                  width: double.infinity,
-                  decoration: const BoxDecoration(color: Color(0xffE0FEF7)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "TOTAL PRICE",
-                        style: const TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.w700),
-                      ),
-                      Container(
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 50),
-                          child: Text(
-                            "2506.00",
-                            style: const TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-
               const SizedBox(
                 height: 40,
               ),

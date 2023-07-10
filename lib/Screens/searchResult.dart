@@ -117,10 +117,7 @@ class _SearchResultState extends State<SearchResult> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                const Icon(
-                                  Icons.sim_card,
-                                  size: 30,
-                                ),
+                                Container(child: Image.asset('assets/images/Esim.png', fit: BoxFit.cover),),
                                 Container(
                                   child: Row(
                                     mainAxisAlignment:
@@ -208,10 +205,7 @@ class _SearchResultState extends State<SearchResult> {
                           padding: const EdgeInsets.all(16.0),
                           child: Column(
                             children: [
-                              Icon(
-                                Icons.sim_card,
-                                size: 40,
-                              ),
+                             Container(child: Image.asset('assets/images/Esim.png', fit: BoxFit.cover),),
                               SizedBox(
                                 height: 10,
                               ),

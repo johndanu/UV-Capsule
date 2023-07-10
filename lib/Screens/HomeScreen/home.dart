@@ -66,43 +66,49 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               SizedBox(height: 16),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => UploadPrescription(),
-                    ),
-                  );
-                },
-                child: Container(
-                  margin: EdgeInsets.only(bottom: 16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        width: double.infinity,
-                        child: Image.asset(
-                          'assets/images/img1.png',
-                          height: 200,
-                          fit: BoxFit.cover,
-                        ),
+              Container(
+                 decoration: BoxDecoration(
+      borderRadius: BorderRadius.all(Radius.circular(8)),
+    ),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => UploadPrescription(),
                       ),
-                      Container(
-                        width: double.infinity,
-                        color: Color(0xff2AB29D),
-                        padding: EdgeInsets.all(8),
-                        child: Center(
-                          child: Text(
-                            'Order via your Prescription',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 17,
+                    );
+                  },
+                  child: Container(
+                    
+                    margin: EdgeInsets.only(bottom: 16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: double.infinity,
+                          child: Image.asset(
+                            'assets/images/img1.png',
+                            height: 200,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        Container(
+                          width: double.infinity,
+                          color: Color(0xff2AB29D),
+                          padding: EdgeInsets.all(8),
+                          child: Center(
+                            child: Text(
+                              'Order via your Prescription',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 17,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
