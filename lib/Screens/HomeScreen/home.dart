@@ -67,9 +67,9 @@ class _HomePageState extends State<HomePage> {
               ),
               SizedBox(height: 16),
               Container(
-                 decoration: BoxDecoration(
-      borderRadius: BorderRadius.all(Radius.circular(8)),
-    ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                ),
                 child: GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -80,34 +80,36 @@ class _HomePageState extends State<HomePage> {
                     );
                   },
                   child: Container(
-                    
-                    margin: EdgeInsets.only(bottom: 16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: double.infinity,
-                          child: Image.asset(
-                            'assets/images/img1.png',
-                            height: 200,
-                            fit: BoxFit.cover,
+                     margin: EdgeInsets.only(bottom: 16),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: double.infinity,
+                            child: Image.asset(
+                              'assets/images/img1.png',
+                              height: 200,
+                              fit: BoxFit.cover,
+                            ),
                           ),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: Color(0xff2AB29D),
-                          padding: EdgeInsets.all(8),
-                          child: Center(
-                            child: Text(
-                              'Order via your Prescription',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 17,
+                          Container(
+                            width: double.infinity,
+                            color: Color(0xff2AB29D),
+                            padding: EdgeInsets.all(8),
+                            child: Center(
+                              child: Text(
+                                'Order via your Prescription',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 17,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -123,35 +125,38 @@ class _HomePageState extends State<HomePage> {
                 },
                 child: Container(
                   margin: EdgeInsets.only(bottom: 16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          width: double.infinity,
+                          child: Image.asset(
+                            'assets/images/img2.png',
+                            height: 200,
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                        width: double.infinity,
-                        child: Image.asset(
-                          'assets/images/img2.png',
-                          height: 200,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      Container(
-                        width: double.infinity,
-                        color: Color(0xff2AB29D),
-                        padding: EdgeInsets.all(8),
-                        child: Center(
-                          child: Text(
-                            'eChanneling',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 17,
+                        Container(
+                          width: double.infinity,
+                          color: Color(0xff2AB29D),
+                          padding: EdgeInsets.all(8),
+                          child: Center(
+                            child: Text(
+                              'eChanneling',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 17,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -166,35 +171,38 @@ class _HomePageState extends State<HomePage> {
                 },
                 child: Container(
                   margin: EdgeInsets.only(bottom: 16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          width: double.infinity,
+                          child: Image.asset(
+                            'assets/images/img3.png',
+                            height: 200,
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                        width: double.infinity,
-                        child: Image.asset(
-                          'assets/images/img3.png',
-                          height: 200,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      Container(
-                        width: double.infinity,
-                        color: Color(0xff2AB29D),
-                        padding: EdgeInsets.all(8),
-                        child: Center(
-                          child: Text(
-                            'Fitness tracker',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 17,
+                        Container(
+                          width: double.infinity,
+                          color: Color(0xff2AB29D),
+                          padding: EdgeInsets.all(8),
+                          child: Center(
+                            child: Text(
+                              'Fitness tracker',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 17,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),

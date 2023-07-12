@@ -11,7 +11,7 @@ class EChannelling extends StatefulWidget {
 }
 
 class _EChannellingState extends State<EChannelling> {
-  int _selectedType = 0; // Initial selection index
+  int _selectedType = 0;
 
   List<String> doctorsList = [
     'John',
@@ -21,7 +21,26 @@ class _EChannellingState extends State<EChannelling> {
     'Jose',
   ];
 
-  List<String> filteredDoctorsList = [];
+  List<String> specializationsList = [
+    'Cardiology',
+    'Dermatology',
+    'Endocrinology',
+    'Gastroenterology',
+    'Neurology',
+  ];
+
+  List<String> hospitalsList = [
+    'General Hospital',
+    'City Hospital',
+    'Medical Center',
+    'Healthcare Clinic',
+    'Specialty Hospital',
+  ];
+
+  List<String> filteredList = [];
+
+  GlobalKey<AutoCompleteTextFieldState<String>> _autoCompleteKey =
+      GlobalKey(); // Key for the AutoCompleteTextField
 
   TextEditingController _searchController = TextEditingController();
   FocusNode _searchFocusNode = FocusNode();
@@ -29,34 +48,67 @@ class _EChannellingState extends State<EChannelling> {
   @override
   void initState() {
     super.initState();
-    filteredDoctorsList.addAll(doctorsList);
+    filteredList.addAll(doctorsList);
   }
 
-  void filterDoctorsList(String query) {
+  String? _selectedItem;
+
+  void filterList(String query) {
     if (query.isNotEmpty) {
       List<String> tempList = [];
-      doctorsList.forEach((doctor) {
-        if (doctor.toLowerCase().contains(query.toLowerCase())) {
-          tempList.add(doctor);
+      List<String> sourceList;
+
+      switch (_selectedType) {
+        case 0:
+          sourceList = doctorsList;
+          break;
+        case 1:
+          sourceList = specializationsList;
+          break;
+        case 2:
+          sourceList = hospitalsList;
+          break;
+        default:
+          sourceList = [];
+          break;
+      }
+      sourceList.forEach((item) {
+        if (item.toLowerCase().contains(query.toLowerCase())) {
+          tempList.add(item);
         }
       });
       setState(() {
-        filteredDoctorsList.clear();
-        filteredDoctorsList.addAll(tempList);
+        filteredList.clear();
+        filteredList.addAll(tempList);
       });
     } else {
       setState(() {
-        filteredDoctorsList.clear();
-        filteredDoctorsList.addAll(doctorsList);
+        filteredList.clear();
+        switch (_selectedType) {
+          case 0:
+            filteredList.addAll(doctorsList);
+            break;
+          case 1:
+            filteredList.addAll(specializationsList);
+            break;
+          case 2:
+            filteredList.addAll(hospitalsList);
+            break;
+          default:
+            break;
+        }
       });
     }
   }
 
-  void _selectName(String name) {
-    setState(() {
-      _searchController.text = name;
-    });
-  }
+void _selectName(String name) {
+  setState(() {
+    _searchController.text = name;
+    _selectedItem = name;
+    filteredList.clear();
+    _searchFocusNode.unfocus(); 
+  });
+}
 
   String _getSelectedTypeName(int selectedType) {
     switch (selectedType) {
@@ -118,7 +170,10 @@ class _EChannellingState extends State<EChannelling> {
                   Container(
                     width: double.infinity,
                     height: 500, // Adjust the desired height of the image
-                    child: Image.asset('assets/images/eChannelling.png', fit: BoxFit.cover),
+                    child: Image.asset(
+                      'assets/images/eChannelling.png',
+                      fit: BoxFit.cover,
+                    ),
                   ),
                   Positioned(
                     bottom: 10,
@@ -149,9 +204,10 @@ class _EChannellingState extends State<EChannelling> {
                 ),
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Flexible(
-                    flex: 1,
+                    flex: 2,
                     child: RadioListTile<int>(
                       title: Text(
                         'Doctors',
@@ -164,13 +220,14 @@ class _EChannellingState extends State<EChannelling> {
                       onChanged: (int? value) {
                         setState(() {
                           _selectedType = value!;
+                          filterList('');
                         });
                       },
                       contentPadding: EdgeInsets.zero, // Remove padding around the text
                     ),
                   ),
                   Flexible(
-                    flex: 1,
+                    flex: 3,
                     child: RadioListTile<int>(
                       title: Text(
                         'Specialization',
@@ -183,13 +240,14 @@ class _EChannellingState extends State<EChannelling> {
                       onChanged: (int? value) {
                         setState(() {
                           _selectedType = value!;
+                          filterList('');
                         });
                       },
                       contentPadding: EdgeInsets.zero, // Remove padding around the text
                     ),
                   ),
                   Flexible(
-                    flex: 1,
+                    flex: 2,
                     child: RadioListTile<int>(
                       title: Text(
                         'Hospital',
@@ -202,6 +260,7 @@ class _EChannellingState extends State<EChannelling> {
                       onChanged: (int? value) {
                         setState(() {
                           _selectedType = value!;
+                          filterList('');
                         });
                       },
                       contentPadding: EdgeInsets.zero, // Remove padding around the text
@@ -211,16 +270,54 @@ class _EChannellingState extends State<EChannelling> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: TextFormField(
-                  focusNode: _searchFocusNode,
+                child: AutoCompleteTextField<String>(
+                  key: _autoCompleteKey,
                   controller: _searchController,
+                  focusNode: _searchFocusNode,
+                  suggestions: filteredList,
                   decoration: InputDecoration(
-                    labelText: 'Search ${_getSelectedTypeName(_selectedType)} Name (Max 30 Characters)',
+                    labelText:
+                        'Search ${_getSelectedTypeName(_selectedType)}Name (Max 30 Characters)',
                     labelStyle: TextStyle(fontWeight: FontWeight.w300),
                     border: OutlineInputBorder(),
                   ),
-                  onChanged: (value) {
-                    filterDoctorsList(value);
+                  itemFilter: (item, query) {
+                    return item.toLowerCase().contains(query.toLowerCase());
+                  },
+                  itemSorter: (a, b) {
+                    return a.compareTo(b);
+                  },
+                  itemSubmitted: (item) {
+                    setState(() {
+                      _searchController.text = item;
+                      _selectedItem = item;
+                      filteredList.clear();
+                    });
+                  },
+                  itemBuilder: (context, item) {
+                    final itemText = item.toLowerCase();
+                    final queryText = _searchController.text.toLowerCase();
+                    final textSpan = TextSpan(
+                      text: itemText.substring(0, queryText.length),
+                      style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black),
+                      children: [
+                        TextSpan(
+                          text: itemText.substring(queryText.length),
+                          style: TextStyle(fontWeight: FontWeight.normal,color: Colors.black54),
+                        ),
+                      ],
+                    );
+
+                    return ListTile(
+                      title: RichText(text: textSpan),
+                      onTap: () {
+                        _selectName(item);
+                      
+                      },
+                    );
+                  },
+                  textChanged: (value) {
+                    filterList(value);
                   },
                 ),
               ),

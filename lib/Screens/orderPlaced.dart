@@ -17,14 +17,28 @@ class _OrderPlacedState extends State<OrderPlaced> {
     'assets/images/grid5.png',
   ];
 
-  final List<List<String>> tableData = [
-    ['Medicine', 'Tablets', 'Price'],
-    ['Acetaminoph ', '28', '560.00'],
-    ['Amoxicilli', '14', '630.00'],
-    ['Ibuprofen ', '07', '714.00'],
+  final List<Map<String, String>> tableData = [
+    {
+      'Medicine': 'Acetaminophen',
+      'Tablets': '28',
+      'Price': '560.00',
+    },
+    {
+      'Medicine': 'Amoxicillin',
+      'Tablets': '14',
+      'Price': '630.00',
+    },
+    {
+      'Medicine': 'Ibuprofen',
+      'Tablets': '07',
+      'Price': '714.00',
+    },
+    {
+      'Medicine': 'Omeprazole',
+      'Tablets': '07',
+      'Price': '602.00',
+    },
   ];
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -198,53 +212,122 @@ class _OrderPlacedState extends State<OrderPlaced> {
                 height: 15,
               ),
               Text(
-                "Order Status",
+                "List of Medicine",
                 style: TextStyle(fontWeight: FontWeight.w700),
               ),
               SizedBox(
                 height: 15,
               ),
-              Table(
-                children: List.generate(tableData.length + 1, (rowIndex) {
-                  if (rowIndex == 0) {
-                    // Add table headings
-                    return TableRow(
-                      children: List.generate(tableData[0].length, (colIndex) {
-                        final cellData = tableData[0][colIndex];
-
-                        return Container(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            cellData,
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        );
-                      }),
-                    );
-                  } else {
-                    // Add table rows
-                    return TableRow(
-                      children: List.generate(tableData[rowIndex - 1].length,
-                          (colIndex) {
-                        final cellData = tableData[rowIndex - 1][colIndex];
-
-                        return Container(
-                          padding: const EdgeInsets.all(8.0),
-                          margin: const EdgeInsets.all(
-                              4.0), // Add a small margin for gap
-                          decoration:
-                              const BoxDecoration(color: Color(0xffE0FEF7)),
-                          child: Text(
-                            cellData,
-                            style: const TextStyle(color: Colors.black),
-                          ),
-                        );
-                      }),
-                    );
-                  }
-                }),
+    Container(
+  width: double.infinity,
+  child: DataTable(
+    columnSpacing: 20.0, // Adjust the spacing between columns
+    dividerThickness: 0.0, // Remove the lines between rows
+    columns: [
+      DataColumn(label: Expanded(child: Text('Medicine',textAlign: TextAlign.center,))),
+      DataColumn(label: Expanded(child: Text('Tablets\n(Tablets)',textAlign: TextAlign.center,))),
+      DataColumn(label: Expanded(child: Text('Price\n(LKR)',textAlign: TextAlign.center,))),
+    ],
+    rows: [...List<DataRow>.generate(tableData.length, (index) {
+      final counter = index + 1;
+      final rowData = tableData[index];
+      return DataRow(
+        cells: [
+          DataCell(
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(8.0),
+              margin: const EdgeInsets.all(4.0),
+              decoration: const BoxDecoration(
+                color: Color(0xffE0FEF7),
               ),
-              const SizedBox(
+              child: Row(
+                children: [
+                  Text('$counter.'),
+                  Expanded(
+                    child: Text(
+                      rowData['Medicine'] ?? '',
+                      style: const TextStyle(color: Colors.black),
+                      overflow: TextOverflow.ellipsis, // Handle text overflow
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          DataCell(
+            Container(
+              padding: const EdgeInsets.all(8.0),
+              margin: const EdgeInsets.all(4.0),
+              decoration: const BoxDecoration(
+                color: Color(0xffE0FEF7),
+              ),
+              child: Text(
+                rowData['Tablets'] ?? '',
+                style: const TextStyle(color: Colors.black),
+                overflow: TextOverflow.ellipsis, // Handle text overflow
+              ),
+            ),
+          ),
+          DataCell(
+            Container(
+              padding: const EdgeInsets.all(8.0),
+              decoration: const BoxDecoration(
+                color: Color(0xffE0FEF7),
+              ),
+              child: Text(
+                rowData['Price'] ?? '',
+                style: const TextStyle(color: Colors.black),
+                overflow: TextOverflow.ellipsis, // Handle text overflow
+              ),
+            ),
+          ),
+        ],
+      );
+    }),   DataRow(
+        // Add the "Total Price" and "Amount" row
+        cells: [
+          DataCell(
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(8.0),
+              margin: const EdgeInsets.all(4.0),
+              decoration: const BoxDecoration(
+                color: Color(0xffE0FEF7),
+              ),
+              child: Expanded(
+                child: Text(
+                  'TOTAL PRICE',
+                  style: const TextStyle(color: Colors.black,fontWeight: FontWeight.w600,fontSize: 15),
+                ),
+              ),
+            ),
+          ),
+          DataCell(
+            Container(
+              child: Text(
+                '',
+              ),
+            ),
+          ),
+          DataCell(
+            Container(
+              padding: const EdgeInsets.all(8.0),
+              decoration: const BoxDecoration(
+                color: Color(0xffE0FEF7),
+              ),
+              child: Text(
+                '2506.00',
+                style: const TextStyle(color: Colors.black,fontWeight: FontWeight.w600,fontSize: 15),
+              ),
+            ),
+          ),
+        ],
+      ),
+  
+            ]),
+),
+const SizedBox(
                 height: 40,
               ),
               const Text(
@@ -258,7 +341,7 @@ class _OrderPlacedState extends State<OrderPlaced> {
                   width: double.infinity,
                   decoration: const BoxDecoration(color: Color(0xffE0FEF7)),
                   child: Padding(
-                    padding: const EdgeInsets.all(32.0),
+                    padding: const EdgeInsets.all(24.0),
                     child: Column(
                       children: [
                         Container(

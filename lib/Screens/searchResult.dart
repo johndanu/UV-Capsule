@@ -22,7 +22,7 @@ class _SearchResultState extends State<SearchResult> {
       appBar: MyAppBar(),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(24.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -77,6 +77,7 @@ class _SearchResultState extends State<SearchResult> {
                           children: [
                             const Text(
                               "Groups by Hospitals",
+                              
                               style: TextStyle(
                                   fontSize: 15, fontWeight: FontWeight.w400),
                             ),
