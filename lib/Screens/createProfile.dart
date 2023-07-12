@@ -142,56 +142,54 @@ class _CreateProfileState extends State<CreateProfile> {
          Row(
   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
   children: [
-    GestureDetector(
+   GestureDetector(
       onTap: () {
         setSelectedRadio(1);
       },
       child: Container(
         decoration: BoxDecoration(
+          color: Color(0xffF5F6F8),
           border: Border.all(
             color: selectedRadio == 1 ? Color(0xff385592) : Colors.transparent,
             width: 1.0,
           ),
           borderRadius: BorderRadius.circular(10.0),
         ),
-        child: Container(
-          color: Color(0xffF5F6F8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(right: 8),
-                child: IconButton(
-                  onPressed: () {
-                    setSelectedRadio(1);
-                  },
-                  icon: Icon(
-                    Icons.male,
-                    size: 40,
-                    color: selectedRadio == 1 ? Color(0xff385592) : Colors.black26,
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Text(
-                "Male",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w400,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          // crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 8),
+              child: IconButton(
+                onPressed: () {
+                  setSelectedRadio(1);
+                },
+                icon: Icon(
+                  Icons.male_outlined,
+                  size: 40,
                   color: selectedRadio == 1 ? Color(0xff385592) : Colors.black26,
                 ),
-              )
-            ],
-          ),
+              ),
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            Text(
+              "male",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w400,
+                color: selectedRadio == 1 ? Color(0xff385592) : Colors.black26,
+              ),
+            )
+          ],
         ),
         height: 100,
         width: 100,
       ),
     ),
-    GestureDetector(
+   GestureDetector(
       onTap: () {
         setSelectedRadio(2);
       },
