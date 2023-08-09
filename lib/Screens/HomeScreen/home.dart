@@ -147,7 +147,7 @@ class _HomePageState extends State<HomePage> {
                           padding: EdgeInsets.all(8),
                           child: Center(
                             child: Text(
-                              'eChanneling',
+                              'Doctor Channelling',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 17,
@@ -182,7 +182,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           width: double.infinity,
                           child: Image.asset(
-                            'assets/images/img3.png',
+                            'assets/images/img4.jpeg',
                             height: 200,
                             fit: BoxFit.cover,
                           ),
@@ -193,7 +193,7 @@ class _HomePageState extends State<HomePage> {
                           padding: EdgeInsets.all(8),
                           child: Center(
                             child: Text(
-                              'Fitness tracker',
+                              'Veterinary',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 17,
