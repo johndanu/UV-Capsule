@@ -30,7 +30,7 @@ class _PaymentState extends State<Payment> {
                   ),
                   children: [
                     TextSpan(
-                      text: 'Hi AATHAV ',
+                      text: 'Hi Siva ! ',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
@@ -121,10 +121,10 @@ class _PaymentState extends State<Payment> {
                 ),
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => (OrderPlaced())),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(builder: (context) => (OrderPlaced())),
+                    // );
                   },
                   style: ElevatedButton.styleFrom(
                     primary: Color(0xff2AB29D),

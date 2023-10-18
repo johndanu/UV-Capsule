@@ -1,3 +1,5 @@
+import 'package:capsule/Screens/homeScreen.dart';
+import 'package:capsule/Screens/payment.dart';
 import 'package:capsule/widgets/appbar.dart';
 import 'package:flutter/material.dart';
 
@@ -24,10 +26,10 @@ class _PlaceAppointmentState extends State<PlaceAppointment> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 60),
+                padding: const EdgeInsets.only(top: 50),
                 child: Text(
                   "Place Appointment",
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
+                  style: TextStyle(fontSize: 26, fontWeight: FontWeight.w700),
                 ),
               ),
               SizedBox(
@@ -92,7 +94,7 @@ class _PlaceAppointmentState extends State<PlaceAppointment> {
                                   TextSpan(
                                     text: '\nCARDIO THORACIC SURGEON ',
                                     style: TextStyle(
-                                        fontStyle: FontStyle.italic,
+                                      
                                         fontSize: 18),
                                   ),
                                 ],
@@ -111,11 +113,13 @@ class _PlaceAppointmentState extends State<PlaceAppointment> {
                               ),
                               child: ElevatedButton(
                                 onPressed: () {
-                                  // Navigator.push(
-                                  //   context,
-                                  //   MaterialPageRoute(
-                                  //       builder: (context) => (PlaceAppointment())),
-                                  // );
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          HomeScreen(selectedIndex: 2),
+                                    ),
+                                  );
                                 },
                                 style: ElevatedButton.styleFrom(
                                   primary: Color(0xff385592),
@@ -178,7 +182,7 @@ class _PlaceAppointmentState extends State<PlaceAppointment> {
                             TextSpan(
                               text: '\n\nAppointment No : 13\n',
                               style: TextStyle(
-                                  fontWeight: FontWeight.w600, fontSize: 18),
+                                  fontWeight: FontWeight.w500, fontSize: 18),
                             ),
                           ],
                         ),
@@ -207,10 +211,7 @@ class _PlaceAppointmentState extends State<PlaceAppointment> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => (PlaceAppointment(
-                          searchValue: widget.searchValue,
-                          selectedType: widget.selectedType,
-                        )),
+                        builder: (context) => (Payment()),
                       ),
                     );
                   },
@@ -223,7 +224,7 @@ class _PlaceAppointmentState extends State<PlaceAppointment> {
                     ),
                   ),
                   child: Text(
-                    "BOOK NOW",
+                    "Pay Now",
                     style: TextStyle(fontSize: 18),
                   ),
                 ),

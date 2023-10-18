@@ -27,7 +27,7 @@ class _VerficationState extends State<Verfication> {
                 height: 80,
               ),
               Text("Verification Successful!",
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600)),
+                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500)),
               SizedBox(
                 height: 60,
               ),

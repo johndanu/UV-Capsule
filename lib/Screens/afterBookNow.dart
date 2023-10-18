@@ -1,3 +1,5 @@
+import 'package:capsule/Screens/homeScreen.dart';
+import 'package:capsule/Screens/payment.dart';
 import 'package:capsule/Screens/placeAppointment.dart';
 import 'package:capsule/widgets/appbar.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +21,7 @@ class _AfterBookNowState extends State<AfterBookNow> {
     {
       'date': 'Friday, 19th May 2023',
       'sessions': '2 Sessions',
-      'icon': Icons.sim_card,
+      'image': "assets/images/Esim.png",
       'location': 'Coop channelling\nCenter-Karapittiya',
       'locationName': 'Karapitiya',
       'time': '6:00 AM (Morning)',
@@ -32,7 +34,7 @@ class _AfterBookNowState extends State<AfterBookNow> {
     {
       'date': 'Saturday, 20th May 2023',
       'sessions': '1 Session',
-      'icon': Icons.sim_card,
+      'image': "assets/images/Esim.png",
       'location': 'Medical Center-Galle',
       'locationName': 'Galle',
       'time': '10:00 AM (Morning)',
@@ -45,7 +47,7 @@ class _AfterBookNowState extends State<AfterBookNow> {
     {
       'date': 'Friday, 19th May 2023',
       'sessions': '2 Sessions',
-      'icon': Icons.sim_card,
+      'image': "assets/images/Esim.png",
       'location': 'Coop channelling\nCenter-Karapittiya',
       'locationName': 'Karapitiya',
       'time': '6:00 AM (Morning)',
@@ -103,7 +105,7 @@ class _AfterBookNowState extends State<AfterBookNow> {
                         Text(
                           "1 Result Found",
                           style: TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.w400),
+                              fontSize: 14, fontWeight: FontWeight.w400),
                         )
                       ],
                     ),
@@ -120,7 +122,7 @@ class _AfterBookNowState extends State<AfterBookNow> {
                             const Text(
                               "Groups by Hospitals",
                               style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w400),
+                                  fontSize: 14, fontWeight: FontWeight.w400),
                             ),
                             Transform.scale(
                               scale: 0.6,
@@ -170,7 +172,7 @@ class _AfterBookNowState extends State<AfterBookNow> {
                           ),
                           Text(
                             "Male",
-                            style: TextStyle(fontSize: 12),
+                            style: TextStyle(fontSize: 13),
                           )
                         ],
                       ),
@@ -181,10 +183,7 @@ class _AfterBookNowState extends State<AfterBookNow> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Icon(
-                              Icons.sim_card,
-                              size: 40,
-                            ),
+                            Container(child: Image.asset('assets/images/Esim.png', fit: BoxFit.cover),),
                             SizedBox(
                               height: 10,
                             ),
@@ -201,9 +200,7 @@ class _AfterBookNowState extends State<AfterBookNow> {
                                   ),
                                   TextSpan(
                                     text: '\nCARDIO THORACIC SURGEON ',
-                                    style: TextStyle(
-                                        fontStyle: FontStyle.italic,
-                                        fontSize: 18),
+                                    style: TextStyle(fontSize: 18),
                                   ),
                                 ],
                               ),
@@ -212,30 +209,32 @@ class _AfterBookNowState extends State<AfterBookNow> {
                               height: 10,
                             ),
                             Container(
-                              height: 50,
+                              height: 40,
                               width: double.infinity,
                               decoration: BoxDecoration(
-                                color: Color(0xff2AB29D),
+                                color: Color(0xff3A5896),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(15)),
                               ),
                               child: ElevatedButton(
                                 onPressed: () {
-                                  // Navigator.push(
-                                  //   context,
-                                  //   MaterialPageRoute(
-                                  //       builder: (context) => (AfterBookNow())),
-                                  // );
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          HomeScreen(selectedIndex: 2),
+                                    ),
+                                  );
                                 },
                                 style: ElevatedButton.styleFrom(
-                                  primary: Color(0xff2AB29D),
+                                  primary: Color(0xff3A5896),
                                   shape: RoundedRectangleBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(15)),
                                   ),
                                 ),
                                 child: Text(
-                                  "BOOK NOW",
+                                  "View Profile",
                                   style: TextStyle(fontSize: 18),
                                 ),
                               ),
@@ -296,6 +295,7 @@ class _AfterBookNowState extends State<AfterBookNow> {
                     child: Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey, width: 1),
                         color: Color(0xffE0FEF7),
                         borderRadius: BorderRadius.circular(8),
                       ),
@@ -338,10 +338,7 @@ class _AfterBookNowState extends State<AfterBookNow> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Center(
-                                          child: Icon(
-                                            item['icon'],
-                                            size: 30,
-                                          ),
+                                          child:  Container(child: Image.asset( item['image'], fit: BoxFit.cover),),
                                         ),
                                         Text(
                                           item['location'],
@@ -389,6 +386,7 @@ class _AfterBookNowState extends State<AfterBookNow> {
                                             Icon(
                                               Icons.info,
                                               color: Colors.blue,
+                                              size: 15,
                                             ),
                                           ],
                                         ),
@@ -411,16 +409,15 @@ class _AfterBookNowState extends State<AfterBookNow> {
                                           height: 10,
                                         ),
                                         Container(
-                                          height: 50,
-                                          width: 150,
+                                          height: 40,
+                                          width: 130,
                                           decoration: BoxDecoration(
                                             color: Color(0xff2AB29D),
                                             borderRadius: BorderRadius.all(
                                               Radius.circular(15),
                                             ),
                                           ),
-                                          child:
-                                           ElevatedButton(
+                                          child: ElevatedButton(
                                             onPressed: () {
                                               Navigator.push(
                                                 context,
@@ -445,7 +442,7 @@ class _AfterBookNowState extends State<AfterBookNow> {
                                             ),
                                             child: Text(
                                               "BOOK NOW",
-                                              style: TextStyle(fontSize: 18),
+                                              style: TextStyle(fontSize: 14),
                                             ),
                                           ),
                                         ),
@@ -467,16 +464,13 @@ class _AfterBookNowState extends State<AfterBookNow> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Center(
-                                          child: Icon(
-                                            item['icon'],
-                                            size: 30,
-                                          ),
+                                          child: Container(child: Image.asset( item['image'], fit: BoxFit.cover),),
                                         ),
                                         Text(
                                           item['location'],
                                           style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w500,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400,
                                           ),
                                         ),
                                         SizedBox(
@@ -517,6 +511,7 @@ class _AfterBookNowState extends State<AfterBookNow> {
                                             ),
                                             Icon(
                                               Icons.info,
+                                              size: 15,
                                               color: Colors.blue,
                                             ),
                                           ],
@@ -540,8 +535,8 @@ class _AfterBookNowState extends State<AfterBookNow> {
                                           height: 10,
                                         ),
                                         Container(
-                                          height: 50,
-                                          width: 150,
+                                          height: 40,
+                                          width: 130,
                                           decoration: BoxDecoration(
                                             color: Color(0xff2AB29D),
                                             borderRadius: BorderRadius.all(
@@ -554,9 +549,9 @@ class _AfterBookNowState extends State<AfterBookNow> {
                                                 context,
                                                 MaterialPageRoute(
                                                   builder: (context) =>
-                                                      (AfterBookNow(
+                                                      (PlaceAppointment(
                                                     searchValue:
-                                                        widget.selectedType,
+                                                        widget.searchValue,
                                                     selectedType:
                                                         widget.selectedType,
                                                   )),
@@ -573,7 +568,7 @@ class _AfterBookNowState extends State<AfterBookNow> {
                                             ),
                                             child: Text(
                                               "BOOK NOW",
-                                              style: TextStyle(fontSize: 18),
+                                              style: TextStyle(fontSize: 14),
                                             ),
                                           ),
                                         ),

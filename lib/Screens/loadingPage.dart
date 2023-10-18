@@ -25,7 +25,7 @@ class _LoadingPageState extends State<LoadingPage> {
     return Scaffold(
       body: Center(
         child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
               height: 100,
@@ -34,6 +34,9 @@ class _LoadingPageState extends State<LoadingPage> {
                 'assets/images/loading.png',
                 fit: BoxFit.cover,
               ),
+            ),
+            SizedBox(
+              height: 15,
             ),
             Text(
               "CAPSULE",

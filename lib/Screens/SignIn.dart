@@ -41,6 +41,7 @@ class _SignInState extends State<SignIn> {
                 dropdownIconPosition: IconPosition.trailing,
                 decoration: const InputDecoration(
                   labelText: 'Enter your mobile Number',
+                  labelStyle: TextStyle(fontWeight: FontWeight.w300),
                   border: OutlineInputBorder(
                     borderSide: BorderSide(),
                   ),
@@ -89,6 +90,9 @@ class _SignInState extends State<SignIn> {
                       child: Text("Resend",
                           style: TextStyle(color: Color(0xff2BB7A1))))
                 ],
+              ),
+              SizedBox(
+                height: 30,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

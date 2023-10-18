@@ -1,3 +1,4 @@
+import 'package:capsule/Screens/homeScreen.dart';
 import 'package:capsule/Screens/signUp.dart';
 import 'package:capsule/widgets/appbar.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,7 @@ class _SigninOTPState extends State<SigninOTP> {
                 ),
                 Text("Verification Code",
                     style:
-                        TextStyle(fontSize: 24, fontWeight: FontWeight.w700)),
+                        TextStyle(fontSize: 26, fontWeight: FontWeight.w500)),
                 SizedBox(
                   height: 60,
                 ),
@@ -37,7 +38,7 @@ class _SigninOTPState extends State<SigninOTP> {
                     "We have sent the code verification to your Mobile Number +9471 900855 ",
                     textAlign: TextAlign.center,
                     style:
-                        TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+                        TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
                 SizedBox(
                   height: 60,
                 ),
@@ -51,8 +52,12 @@ class _SigninOTPState extends State<SigninOTP> {
                   ),
                   child: TextFormField(
                     decoration: InputDecoration(
-                      hintText: '    Enter OTP',
+                      contentPadding: EdgeInsets.symmetric(horizontal: 20),
+                      hintText: 'Enter OTP',
                       border: InputBorder.none,
+                      hintStyle: TextStyle(
+                        fontWeight: FontWeight.w300,
+                      ),
                     ),
                   ),
                 ),
@@ -70,7 +75,7 @@ class _SigninOTPState extends State<SigninOTP> {
                     onPressed: () {
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => SigninOTP()),
+                        MaterialPageRoute(builder: (context) => HomeScreen()),
                       );
                     },
                     style: ElevatedButton.styleFrom(
@@ -81,13 +86,14 @@ class _SigninOTPState extends State<SigninOTP> {
                     ),
                     child: Text(
                       "SUBMIT",
-                      style: TextStyle(fontSize: 18),
+                      style: TextStyle(fontSize: 17),
                     ),
                   ),
                 ),
                 SizedBox(
                   height: 20,
                 ),
+                SizedBox(height:20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -108,7 +114,7 @@ class _SigninOTPState extends State<SigninOTP> {
                           );
                         },
                         child: Text("Sign up",
-                        style: TextStyle(color: Color(0xff2BB7A1))))
+                            style: TextStyle(color: Color(0xff2BB7A1))))
                   ],
                 )
               ],

@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     children: [
                       TextSpan(
-                        text: 'Hi AATHAV ',
+                        text: 'Hi Siva ',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
@@ -66,44 +66,51 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               SizedBox(height: 16),
-              GestureDetector(
-                onTap: () {
-                  
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => UploadPrescription(),
-                    ),
-                  );
-                },
-                child: Container(
-                  margin: EdgeInsets.only(bottom: 16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        width: double.infinity,
-                        child: Image.asset(
-                          'assets/images/img1.png',
-                          height: 200,
-                          fit: BoxFit.cover,
-                        ),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                ),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => UploadPrescription(),
                       ),
-                      Container(
-                        width: double.infinity,
-                        color: Color(0xff2AB29D),
-                        padding: EdgeInsets.all(8),
-                        child: Center(
-                          child: Text(
-                            'Image 1',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
+                    );
+                  },
+                  child: Container(
+                     margin: EdgeInsets.only(bottom: 16),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: double.infinity,
+                            child: Image.asset(
+                              'assets/images/img1.png',
+                              height: 200,
+                              fit: BoxFit.cover,
                             ),
                           ),
-                        ),
+                          Container(
+                            width: double.infinity,
+                            color: Color(0xff2AB29D),
+                            padding: EdgeInsets.all(8),
+                            child: Center(
+                              child: Text(
+                                'Order via your Prescription',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 17,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
                 ),
               ),
@@ -118,78 +125,84 @@ class _HomePageState extends State<HomePage> {
                 },
                 child: Container(
                   margin: EdgeInsets.only(bottom: 16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          width: double.infinity,
+                          child: Image.asset(
+                            'assets/images/img2.png',
+                            height: 200,
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                        width: double.infinity,
-                        child: Image.asset(
-                          'assets/images/img2.png',
-                          height: 200,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      Container(
-                        width: double.infinity,
-                        color: Color(0xff2AB29D),
-                        padding: EdgeInsets.all(8),
-                        child: Center(
-                          child: Text(
-                            'Image 2',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
+                        Container(
+                          width: double.infinity,
+                          color: Color(0xff2AB29D),
+                          padding: EdgeInsets.all(8),
+                          child: Center(
+                            child: Text(
+                              'Doctor Channelling',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 17,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => EChannelling(),
-                    ),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) => EChannelling(),
+                  //   ),
+                  // );
                 },
                 child: Container(
                   margin: EdgeInsets.only(bottom: 16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          width: double.infinity,
+                          child: Image.asset(
+                            'assets/images/img4.jpeg',
+                            height: 200,
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                        width: double.infinity,
-                        child: Image.asset(
-                          'assets/images/img3.png',
-                          height: 200,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      Container(
-                        width: double.infinity,
-                        color: Color(0xff2AB29D),
-                        padding: EdgeInsets.all(8),
-                        child: Center(
-                          child: Text(
-                            'Image 3',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
+                        Container(
+                          width: double.infinity,
+                          color: Color(0xff2AB29D),
+                          padding: EdgeInsets.all(8),
+                          child: Center(
+                            child: Text(
+                              'Veterinary',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 17,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),

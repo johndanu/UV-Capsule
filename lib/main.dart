@@ -1,4 +1,6 @@
+import 'package:capsule/Screens/afterBookNow.dart';
 import 'package:capsule/Screens/loadingPage.dart';
+import 'package:capsule/Screens/orderPlaced.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,14 +12,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Loading Page Example',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          fontFamily: 'Manrope',
-        ),
-        home: LoadingPage(),
-      ),
+          debugShowCheckedModeBanner: false,
+          title: 'Loading Page Example',
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+          home: LoadingPage()),
     );
   }
 }

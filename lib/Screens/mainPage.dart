@@ -91,7 +91,9 @@ class MainPage extends StatelessWidget {
               ),
               child: Text(
                 "SIGN UP",
-                style: TextStyle(fontSize: 16),
+                style: TextStyle(
+                  fontSize: 16,
+                ),
               ),
             ),
           )
