@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:capsule/Models/auth_model.dart';
 import 'package:capsule/Screens/mainPage.dart';
+import 'package:capsule/Utils/shared_preference.dart';
 import 'package:flutter/material.dart';
 
 class LoadingPage extends StatefulWidget {
@@ -17,6 +19,18 @@ class _LoadingPageState extends State<LoadingPage> {
         context,
         MaterialPageRoute(builder: (context) => MainPage()),
       );
+    });
+  }
+
+  void loading() async {
+    Login data = await CapsulePreferences().getUser();
+
+    Timer(Duration(seconds: 5), () {
+      if (data.userId == null) {
+        Navigator.pushReplacementNamed(context, '/main');
+      } else {
+        Navigator.pushReplacementNamed(context, '/home');
+      }
     });
   }
 
