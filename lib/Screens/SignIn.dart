@@ -1,8 +1,13 @@
+import 'dart:async';
+
+import 'package:another_flushbar/flushbar.dart';
+import 'package:capsule/Providers/auth_provider.dart';
 import 'package:capsule/Screens/signUp.dart';
 import 'package:capsule/Screens/signinOtpPage.dart';
 import 'package:capsule/widgets/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:provider/provider.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -12,6 +17,56 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  TextEditingController phoneNumberController = TextEditingController();
+  bool resent = false;
+
+  @override
+  void initState() {
+    super.initState();
+    AuthProvider auth = Provider.of<AuthProvider>(context, listen: false);
+
+    setState(() {
+      phoneNumberController.text = auth.phone;
+    });
+  }
+
+  Future<void> requestOtp(BuildContext context) async {
+    AuthProvider auth = Provider.of<AuthProvider>(context, listen: false);
+    setState(() {
+      resent = false;
+    });
+    if (phoneNumberController.text != '') {
+      Map<String, dynamic> data = {
+        "mobile_no": phoneNumberController.text,
+        "is_new_reg": 0,
+      };
+
+      final Map<String, dynamic> response = await auth.getOtp(data);
+
+      if (response['status']) {
+        Navigator.pushNamed(context, '/signIn-otp');
+      } else {
+        Flushbar(
+          title: "Failed",
+          message: response['message'].toString(),
+          duration: const Duration(seconds: 3),
+        ).show(context);
+      }
+
+      Timer(Duration(minutes: 3), () {
+        setState(() {
+          resent = true;
+        });
+      });
+    } else {
+      Flushbar(
+        title: 'Invalid phone numer',
+        message: 'Please enter valid phone number',
+        duration: Duration(seconds: 5),
+      ).show(context);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,6 +92,7 @@ class _SignInState extends State<SignIn> {
                 height: 100,
               ),
               IntlPhoneField(
+                controller: phoneNumberController,
                 flagsButtonPadding: const EdgeInsets.all(8),
                 dropdownIconPosition: IconPosition.trailing,
                 decoration: const InputDecoration(
@@ -47,7 +103,13 @@ class _SignInState extends State<SignIn> {
                   ),
                 ),
                 initialCountryCode: 'LK',
-                onChanged: (phone) {},
+                onChanged: (phone) {
+                  if (phone.isValidNumber()) {
+                    phoneNumberController.text = phone.number;
+                  } else {
+                    phoneNumberController.text = '';
+                  }
+                },
               ),
               SizedBox(
                 height: 10,
@@ -61,10 +123,7 @@ class _SignInState extends State<SignIn> {
                 ),
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => SigninOTP()),
-                    );
+                    requestOtp(context);
                   },
                   style: ElevatedButton.styleFrom(
                     primary: Color(0xff2AB29D),
@@ -72,25 +131,31 @@ class _SignInState extends State<SignIn> {
                       borderRadius: BorderRadius.all(Radius.circular(15)),
                     ),
                   ),
-                  child: Text(
-                    "REQUEST OTP",
-                    style: TextStyle(fontSize: 18),
+                  child: Consumer<AuthProvider>(
+                    builder: (context, auth, child) {
+                      return auth.isLoading
+                          ? CircularProgressIndicator()
+                          : Text("REQUEST OTP", style: TextStyle(fontSize: 18));
+                    },
                   ),
                 ),
               ),
               SizedBox(
                 height: 20,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("Didn't get the OTP?"),
-                  TextButton(
-                      onPressed: () {},
-                      child: Text("Resend",
-                          style: TextStyle(color: Color(0xff2BB7A1))))
-                ],
-              ),
+              if (resent)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Didn't get the OTP?"),
+                    TextButton(
+                        onPressed: () {
+                          requestOtp(context);
+                        },
+                        child: Text("Resend",
+                            style: TextStyle(color: Color(0xff2BB7A1))))
+                  ],
+                ),
               SizedBox(
                 height: 30,
               ),

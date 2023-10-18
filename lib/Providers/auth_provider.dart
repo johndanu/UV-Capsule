@@ -5,72 +5,143 @@ import 'package:capsule/Utils/config.dart';
 import 'package:capsule/Utils/shared_preference.dart';
 import 'package:capsule/Models/auth_model.dart';
 
-enum Status {
-  notLoggedIn,
-  // NotRegistered,
-  loggedIn,
-  // Registered,
-  authenticating,
-  // Registering,
-  loggedOut
-}
-
 class AuthProvider extends ChangeNotifier {
-  Status _loggedInStatus = Status.notLoggedIn;
+  bool isLoading = false;
+  final Map<String, String> headers = {'Content-Type': 'application/json'};
 
-  Status get loggedInStatus => _loggedInStatus;
+  bool get loading => isLoading;
 
-  set loggedInStatus(Status value) {
-    _loggedInStatus = value;
+  String phone = '';
+
+  Future<Map<String, dynamic>> getOtp(Map<String, dynamic> body) async {
+    isLoading = true;
+    notifyListeners();
+
+    var result;
+    try {
+      final response = await http.post(
+        Uri.parse(Config.getOtp),
+        body: jsonEncode(body),
+        headers: headers,
+      );
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        final jsonData = data['data'];
+
+        print(data);
+
+        result = {'status': true, 'message': "success"};
+        phone = body['mobile_no'];
+
+        isLoading = false;
+        notifyListeners();
+      } else {
+        isLoading = false;
+        notifyListeners();
+
+        final data = jsonDecode(response.body);
+        final msg = data['error'];
+        print(msg);
+        print(response.statusCode);
+        result = {'status': false, 'message': '$msg'};
+      }
+      return result;
+    } catch (e) {
+      print(e);
+      isLoading = false;
+      notifyListeners();
+      return result;
+    }
   }
 
-  // Future<Map<String, dynamic>> login(String username, String password) async {
-  //   try {
-  //     var result;
+  Future<Map<String, dynamic>> verifyOtp(Map<String, dynamic> body) async {
+    isLoading = true;
+    notifyListeners();
 
-  //     _loggedInStatus = Status.authenticating;
-  //     notifyListeners();
+    var result;
+    try {
+      final response = await http.post(
+        Uri.parse(Config.verifyOtp),
+        body: jsonEncode(body),
+        headers: headers,
+      );
 
-  //     final Map<String, String> headers = {'Content-Type': 'application/json'};
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        final jsonData = data['data'];
 
-  //     final Map<String, dynamic> loginData = {
-  //       'grant_type': 'password',
-  //       'client_id': '26',
-  //       'client_secret': 'SQ9CcoH2jBQNQYRqqXdDhm1hJZSgawjSTjAwiI4P',
-  //       'username': username,
-  //       'password': password,
-  //       'scope': '',
-  //     };
+        print(data);
 
-  //     //login
+        if (jsonData['user_id'] != "") {
+          Login auth = Login.fromJson(jsonData);
+          await CapsulePreferences().login(auth);
+        }
 
-  //     final response = await http.post(Uri.parse(Config.login),
-  //         body: jsonEncode(loginData), headers: headers);
+        result = {'status': true, 'message': "success"};
 
-  //     if (response.statusCode == 200) {
-  //       final Map<String, dynamic> responseData = jsonDecode(response.body);
+        isLoading = false;
+        notifyListeners();
+      } else {
+        isLoading = false;
+        notifyListeners();
 
-  //       Login auth = Login.fromJson(responseData);
+        final data = jsonDecode(response.body);
+        final msg = data['error'];
+        print(msg);
+        print(response.statusCode);
+        result = {'status': false, 'message': '$msg'};
+      }
+      return result;
+    } catch (e) {
+      print(e);
+      isLoading = false;
+      notifyListeners();
+      return result;
+    }
+  }
 
-  //       await LoginPreferences().login(auth);
+  Future<Map<String, dynamic>> createProfile(Map<String, dynamic> body) async {
+    isLoading = true;
+    notifyListeners();
 
-  //       _loggedInStatus = Status.loggedIn;
-  //       notifyListeners();
+    var result;
+    try {
+      final response = await http.post(
+        Uri.parse(Config.createProfie),
+        body: jsonEncode(body),
+        headers: headers,
+      );
 
-  //       result = {'status': true, 'message': 'Successful', 'user': auth};
-  //     } else {
-  //       _loggedInStatus = Status.notLoggedIn;
-  //       notifyListeners();
-  //       result = {
-  //         'status': false,
-  //         'message': jsonDecode(response.body)['message']
-  //       };
-  //     }
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        final jsonData = data['data'];
 
-  //     return result ?? {'status': false, 'message': 'Unknown error occurred'};
-  //   } catch (e) {
-  //     print(e);
-  //     return {'status': false, 'message': 'An error occurred'};
-  //   }
-  // }
+        print(data);
+
+        Login auth = Login.fromJson(jsonData);
+        await CapsulePreferences().login(auth);
+
+        result = {'status': true, 'message': "success"};
+
+        isLoading = false;
+        notifyListeners();
+      } else {
+        isLoading = false;
+        notifyListeners();
+
+        final data = jsonDecode(response.body);
+        final msg = data['error'];
+        print(msg);
+        print(response.statusCode);
+        result = {'status': false, 'message': '$msg'};
+      }
+      return result;
+    } catch (e) {
+      print(e);
+      isLoading = false;
+      notifyListeners();
+      return result;
+    }
+  }
 }

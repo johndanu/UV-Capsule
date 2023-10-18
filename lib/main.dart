@@ -1,13 +1,14 @@
-import 'package:capsule/Screens/afterBookNow.dart';
+import 'package:capsule/Providers/auth_provider.dart';
+import 'package:capsule/Screens/SignIn.dart';
+import 'package:capsule/Screens/homeScreen.dart';
 import 'package:capsule/Screens/loadingPage.dart';
 import 'package:capsule/Screens/mainPage.dart';
-import 'package:capsule/Screens/orderPlaced.dart';
-import 'package:capsule/Providers/auth_provider.dart';
-import 'package:capsule/Utils/shared_preference.dart';
+import 'package:capsule/Screens/signUp.dart';
+import 'package:capsule/Screens/signinOtpPage.dart';
+import 'package:capsule/Screens/signupOtpPage.dart';
+import 'package:capsule/Screens/verficationPage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'Models/auth_model.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,10 +19,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future<Login> getUserData() {
-      return CapsulePreferences().getUser();
-    }
-
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider()),
@@ -36,7 +33,13 @@ class MyApp extends StatelessWidget {
           home: LoadingPage(),
           routes: {
             '/loading': (context) => LoadingPage(),
+            '/home': (context) => HomeScreen(),
             '/main': (context) => MainPage(),
+            '/sign-up': (context) => SignUp(),
+            '/signUp-otp': (context) => SignupOTP(),
+            '/sign-in': (context) => SignIn(),
+            '/signIn-otp': (context) => SigninOTP(),
+            '/verify': (context) => Verfication(),
           },
         ),
       ),

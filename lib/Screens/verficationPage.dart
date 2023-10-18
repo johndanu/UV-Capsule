@@ -1,6 +1,8 @@
+import 'package:capsule/Providers/auth_provider.dart';
 import 'package:capsule/Screens/createProfile.dart';
 import 'package:capsule/widgets/appbar.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Verfication extends StatefulWidget {
   const Verfication({super.key});
@@ -12,6 +14,7 @@ class Verfication extends StatefulWidget {
 class _VerficationState extends State<Verfication> {
   @override
   Widget build(BuildContext context) {
+    AuthProvider auth = Provider.of<AuthProvider>(context, listen: false);
     return Scaffold(
       appBar: MyAppBar(),
       body: Padding(
@@ -31,7 +34,8 @@ class _VerficationState extends State<Verfication> {
               SizedBox(
                 height: 60,
               ),
-              Text("Your Mobile Number +9471 900855 is verified Successfully!",
+              Text(
+                  "Your Mobile Number +94${auth.phone} is verified Successfully!",
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
               SizedBox(
