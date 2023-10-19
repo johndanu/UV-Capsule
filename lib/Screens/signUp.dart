@@ -54,7 +54,7 @@ class _SignUpState extends State<SignUp> {
         ).show(context);
       }
 
-      Timer(Duration(minutes: 3), () {
+      Timer(Duration(minutes: 1), () {
         setState(() {
           resent = true;
         });
