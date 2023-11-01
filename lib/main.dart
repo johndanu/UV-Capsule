@@ -1,8 +1,11 @@
 import 'package:capsule/Providers/auth_provider.dart';
+import 'package:capsule/Providers/order_provider.dart';
 import 'package:capsule/Screens/SignIn.dart';
 import 'package:capsule/Screens/homeScreen.dart';
 import 'package:capsule/Screens/loadingPage.dart';
 import 'package:capsule/Screens/mainPage.dart';
+import 'package:capsule/Screens/orderPlaced.dart';
+import 'package:capsule/Screens/prepareOrder.dart';
 import 'package:capsule/Screens/signUp.dart';
 import 'package:capsule/Screens/signinOtpPage.dart';
 import 'package:capsule/Screens/signupOtpPage.dart';
@@ -22,6 +25,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => OrderProvider()),
       ],
       child: SafeArea(
         child: MaterialApp(
@@ -40,6 +44,8 @@ class MyApp extends StatelessWidget {
             '/sign-in': (context) => SignIn(),
             '/signIn-otp': (context) => SigninOTP(),
             '/verify': (context) => Verfication(),
+            '/prepare-order': (context) => PrepareOrder(),
+            '/order': (context) => OrderPlaced(),
           },
         ),
       ),

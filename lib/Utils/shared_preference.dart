@@ -9,13 +9,6 @@ class CapsulePreferences {
     prefs.setString('user_id', login.userId ?? '');
   }
 
-  Future<String?> getUserId() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    String? token = prefs.getString('user_id');
-    return token;
-  }
-
   Future<Login> getUser() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 

@@ -1,6 +1,8 @@
 import 'package:another_flushbar/flushbar.dart';
+import 'package:capsule/Models/auth_model.dart';
 import 'package:capsule/Providers/auth_provider.dart';
 import 'package:capsule/Screens/homeScreen.dart';
+import 'package:capsule/Utils/shared_preference.dart';
 import 'package:capsule/widgets/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -94,6 +96,10 @@ class _CreateProfileState extends State<CreateProfile> {
       final Map<String, dynamic> response = await auth.createProfile(data);
 
       if (response['status']) {
+        Login user = await CapsulePreferences().getUser();
+        final query = {"user_id": user.userId};
+        await auth.getProfile(queryParams: query);
+
         Navigator.pushReplacementNamed(context, '/home');
       } else {
         Flushbar(

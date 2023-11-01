@@ -1,8 +1,10 @@
+import 'package:capsule/Providers/auth_provider.dart';
 import 'package:capsule/Screens/homeScreen.dart';
 import 'package:capsule/Screens/orderPlaced.dart';
 import 'package:capsule/widgets/appbar.dart';
 import 'package:capsule/widgets/myBottomBar.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class PrepareOrder extends StatefulWidget {
   @override
@@ -12,6 +14,8 @@ class PrepareOrder extends StatefulWidget {
 class _PrepareOrderState extends State<PrepareOrder> {
   @override
   Widget build(BuildContext context) {
+    AuthProvider auth = Provider.of<AuthProvider>(context, listen: false);
+
     return Scaffold(
       appBar: MyAppBar(),
       body: SingleChildScrollView(
@@ -31,7 +35,7 @@ class _PrepareOrderState extends State<PrepareOrder> {
                   ),
                   children: [
                     TextSpan(
-                      text: 'Hi Siva ! ',
+                      text: 'Hi ${auth.profile!.first_name} ',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                       ),

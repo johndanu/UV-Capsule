@@ -9,6 +9,10 @@ class AuthProvider extends ChangeNotifier {
   bool isLoading = false;
   final Map<String, String> headers = {'Content-Type': 'application/json'};
 
+  Profile? _profile;
+
+  Profile? get profile => _profile;
+
   bool get loading => isLoading;
 
   String phone = '';
@@ -142,6 +146,56 @@ class AuthProvider extends ChangeNotifier {
       isLoading = false;
       notifyListeners();
       return result;
+    }
+  }
+
+  Future getProfile({Map<String, dynamic>? queryParams}) async {
+    String apiUrl = Config.viewProfie;
+
+    if (queryParams != null) {
+      final convertedParams = queryParams.map((key, value) {
+        if (value is int || value is double) {
+          return MapEntry(key, value.toString());
+        } else {
+          return MapEntry(key, value.toString());
+        }
+      });
+
+      Uri uri = Uri.parse(apiUrl).replace(queryParameters: convertedParams);
+      apiUrl = uri.toString();
+    }
+
+    try {
+      var result;
+      isLoading = true;
+      notifyListeners();
+
+      final response = await http.get(Uri.parse(apiUrl), headers: headers);
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        final jsonData = data['data'];
+
+        _profile = Profile.fromJson(jsonData);
+        result = {'status': true, 'message': 'Successful'};
+
+        isLoading = false;
+        notifyListeners();
+      } else {
+        _profile = null;
+        final data = jsonDecode(response.body);
+        final msg = data['error'];
+        print(msg);
+        print(response.statusCode);
+        result = {'status': false, 'message': '$msg'};
+      }
+      return result;
+    } catch (e) {
+      print(e);
+      isLoading = false;
+      notifyListeners();
+
+      return {'status': false, 'message': 'Failed to fetch data3'};
     }
   }
 }
