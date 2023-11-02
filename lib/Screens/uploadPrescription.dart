@@ -57,7 +57,8 @@ class _UploadPrescriptionState extends State<UploadPrescription> {
       final Map<String, dynamic> response = await order.placeOrder(data);
 
       if (response['status']) {
-        Navigator.pushReplacementNamed(context, '/prepare-order');
+        Navigator.pushReplacementNamed(context, '/prepare-order',
+            arguments: response['orderId']);
       } else {
         Flushbar(
           title: "Failed",

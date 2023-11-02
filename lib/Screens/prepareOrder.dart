@@ -12,6 +12,20 @@ class PrepareOrder extends StatefulWidget {
 }
 
 class _PrepareOrderState extends State<PrepareOrder> {
+  late String itemId;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final args = ModalRoute.of(context)!.settings.arguments;
+    if (args is String) {
+      itemId = args;
+      // Fetch data based on itemId here
+    } else {
+      // Handle the case where the argument is not of the expected type
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     AuthProvider auth = Provider.of<AuthProvider>(context, listen: false);
@@ -85,10 +99,7 @@ class _PrepareOrderState extends State<PrepareOrder> {
                 ),
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => (OrderPlaced())),
-                    );
+                    Navigator.pushNamed(context, '/order', arguments: itemId);
                   },
                   style: ElevatedButton.styleFrom(
                     primary: Color(0xff2AB29D),

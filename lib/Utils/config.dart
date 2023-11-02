@@ -8,4 +8,5 @@ class Config {
   static const deleteProfie = '$baseUrl/inactivate_profile';
   static const placeOrder = '$baseUrl/place_order';
   static const getAllOrders = '$baseUrl/all_my_orders';
+  static const getSingleOrder = '$baseUrl/single_order';
 }

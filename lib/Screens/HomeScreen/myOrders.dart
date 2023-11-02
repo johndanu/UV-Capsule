@@ -50,12 +50,12 @@ class _MyOrdersPageState extends State<MyOrdersPage> {
     OrderProvider order = Provider.of<OrderProvider>(context, listen: false);
     return Scaffold(
       appBar: MyAppBar(),
-      body: SingleChildScrollView(
-        child: list.isEmpty
-            ? Center(
-                child: CircularProgressIndicator(),
-              )
-            : Padding(
+      body: list.isEmpty
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : SingleChildScrollView(
+              child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -121,7 +121,7 @@ class _MyOrdersPageState extends State<MyOrdersPage> {
                   ],
                 ),
               ),
-      ),
+            ),
     );
   }
 }

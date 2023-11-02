@@ -25,11 +25,12 @@ class Order {
   final String ordered_at;
   final String status;
   final String customer_name;
-  final String contact_no;
-  final String delivery_address;
-  final String delivery_person;
-  final String deliver_at;
-  final Int payment_amount;
+  final String? contact_no;
+  final String? delivery_address;
+  final String? delivery_person;
+  final String? deliver_at;
+  final String? quantity;
+  final int payment_amount;
   final List medicines;
   final List images;
 
@@ -41,6 +42,7 @@ class Order {
     required this.contact_no,
     required this.delivery_address,
     required this.delivery_person,
+    required this.quantity,
     required this.deliver_at,
     required this.payment_amount,
     required this.medicines,
@@ -56,6 +58,7 @@ class Order {
       contact_no: responseData['contact_no'],
       delivery_address: responseData['delivery_address'],
       delivery_person: responseData['delivery_person'],
+      quantity: responseData['quantity'],
       deliver_at: responseData['deliver_at'],
       payment_amount: responseData['payment_amount'],
       medicines: responseData['medicines'],

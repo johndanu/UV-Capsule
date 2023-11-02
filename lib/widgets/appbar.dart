@@ -1,8 +1,14 @@
+import 'package:capsule/Utils/shared_preference.dart';
 import 'package:flutter/material.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
+
+  void logout(BuildContext context) async {
+    await CapsulePreferences().clearAll();
+    Navigator.pushReplacementNamed(context, '/main');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,19 +39,16 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
             Icons.help,
             color: Colors.black38,
           ),
-          onPressed: () {
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => const EChannelling()),
-            // );
-          },
+          onPressed: () {},
         ),
         IconButton(
           icon: Icon(
             Icons.notifications,
             color: Colors.black38,
           ),
-          onPressed: () {},
+          onPressed: () {
+            logout(context);
+          },
         ),
       ],
     );

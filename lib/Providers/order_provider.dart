@@ -53,10 +53,11 @@ class OrderProvider extends ChangeNotifier {
       final responseBytes = await responseStream.toBytes();
       final responseBody = utf8.decode(responseBytes);
 
-      print(responseBody);
-
       if (response.statusCode == 200) {
-        result = {'status': true, 'message': "success"};
+        Map<String, dynamic> responseJson = json.decode(responseBody);
+
+        String orderId = responseJson['data']['order_id'];
+        result = {'status': true, 'message': "success", 'orderId': orderId};
 
         isLoading = false;
         notifyListeners();
@@ -134,7 +135,7 @@ class OrderProvider extends ChangeNotifier {
   }
 
   Future get_order({Map<String, dynamic>? queryParams}) async {
-    String apiUrl = Config.viewProfie;
+    String apiUrl = Config.getSingleOrder;
 
     if (queryParams != null) {
       final convertedParams = queryParams.map((key, value) {
@@ -158,7 +159,7 @@ class OrderProvider extends ChangeNotifier {
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
-        final jsonData = data['data'];
+        final jsonData = data['data'][0];
 
         _order = Order.fromJson(jsonData);
         result = {'status': true, 'message': 'Successful'};
