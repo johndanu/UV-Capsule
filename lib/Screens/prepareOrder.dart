@@ -1,8 +1,10 @@
+import 'package:capsule/Providers/auth_provider.dart';
 import 'package:capsule/Screens/homeScreen.dart';
 import 'package:capsule/Screens/orderPlaced.dart';
 import 'package:capsule/widgets/appbar.dart';
 import 'package:capsule/widgets/myBottomBar.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class PrepareOrder extends StatefulWidget {
   @override
@@ -10,8 +12,24 @@ class PrepareOrder extends StatefulWidget {
 }
 
 class _PrepareOrderState extends State<PrepareOrder> {
+  late String itemId;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final args = ModalRoute.of(context)!.settings.arguments;
+    if (args is String) {
+      itemId = args;
+      // Fetch data based on itemId here
+    } else {
+      // Handle the case where the argument is not of the expected type
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    AuthProvider auth = Provider.of<AuthProvider>(context, listen: false);
+
     return Scaffold(
       appBar: MyAppBar(),
       body: SingleChildScrollView(
@@ -31,7 +49,7 @@ class _PrepareOrderState extends State<PrepareOrder> {
                   ),
                   children: [
                     TextSpan(
-                      text: 'Hi Siva ! ',
+                      text: 'Hi ${auth.profile!.first_name} ',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
@@ -81,10 +99,7 @@ class _PrepareOrderState extends State<PrepareOrder> {
                 ),
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => (OrderPlaced())),
-                    );
+                    Navigator.pushNamed(context, '/order', arguments: itemId);
                   },
                   style: ElevatedButton.styleFrom(
                     primary: Color(0xff2AB29D),

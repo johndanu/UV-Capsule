@@ -1,7 +1,10 @@
+import 'package:another_flushbar/flushbar.dart';
+import 'package:capsule/Providers/auth_provider.dart';
 import 'package:capsule/Screens/signinOtpPage.dart';
 import 'package:capsule/Screens/verficationPage.dart';
 import 'package:capsule/widgets/appbar.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SignupOTP extends StatefulWidget {
   const SignupOTP({super.key});
@@ -11,8 +14,41 @@ class SignupOTP extends StatefulWidget {
 }
 
 class _SignupOTPState extends State<SignupOTP> {
+  TextEditingController otpController = TextEditingController();
+
+  Future<void> verifyOtp(BuildContext context) async {
+    AuthProvider auth = Provider.of<AuthProvider>(context, listen: false);
+
+    if (otpController.text != '') {
+      Map<String, dynamic> data = {
+        "mobile_no": auth.phone,
+        "otp_code": otpController.text,
+        "is_new_reg": 1,
+      };
+
+      final Map<String, dynamic> response = await auth.verifyOtp(data);
+
+      if (response['status']) {
+        Navigator.pushReplacementNamed(context, '/verify');
+      } else {
+        Flushbar(
+          title: "Failed",
+          message: response['message'].toString(),
+          duration: const Duration(seconds: 3),
+        ).show(context);
+      }
+    } else {
+      Flushbar(
+        title: 'Invalid phone numer',
+        message: 'Please enter valid otp number',
+        duration: Duration(seconds: 5),
+      ).show(context);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    AuthProvider auth = Provider.of<AuthProvider>(context, listen: false);
     return Scaffold(
       appBar: MyAppBar(),
       body: SingleChildScrollView(
@@ -35,7 +71,7 @@ class _SignupOTPState extends State<SignupOTP> {
                   height: 60,
                 ),
                 Text(
-                    "We have sent the code verification to your Mobile Number +9471 900855 ",
+                    'We have sent the code verification to your Mobile Number +94${auth.phone}',
                     textAlign: TextAlign.center,
                     style:
                         TextStyle(fontSize: 15, fontWeight: FontWeight.w400)),
@@ -51,6 +87,8 @@ class _SignupOTPState extends State<SignupOTP> {
                     border: Border.all(), // Add border
                   ),
                   child: TextFormField(
+                    controller: otpController,
+                    keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.symmetric(horizontal: 20),
                       hintText: 'Enter OTP',
@@ -72,10 +110,7 @@ class _SignupOTPState extends State<SignupOTP> {
                   ),
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => Verfication()),
-                      );
+                      verifyOtp(context);
                     },
                     style: ElevatedButton.styleFrom(
                       primary: Color(0xff3A5896),
@@ -83,9 +118,12 @@ class _SignupOTPState extends State<SignupOTP> {
                         borderRadius: BorderRadius.all(Radius.circular(15)),
                       ),
                     ),
-                    child: Text(
-                      "SUBMIT",
-                      style: TextStyle(fontSize: 17),
+                    child: Consumer<AuthProvider>(
+                      builder: (context, auth, child) {
+                        return auth.isLoading
+                            ? CircularProgressIndicator()
+                            : Text("SUBMIT", style: TextStyle(fontSize: 18));
+                      },
                     ),
                   ),
                 ),
@@ -103,7 +141,7 @@ class _SignupOTPState extends State<SignupOTP> {
                           Icons.arrow_back_ios,
                           size: 15,
                         )),
-                    Text("Don't have an acccount?"),
+                    Text("Already have an account?"),
                     TextButton(
                         onPressed: () {
                           Navigator.push(

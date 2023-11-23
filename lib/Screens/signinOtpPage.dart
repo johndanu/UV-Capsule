@@ -1,7 +1,12 @@
+import 'package:another_flushbar/flushbar.dart';
+import 'package:capsule/Models/auth_model.dart';
+import 'package:capsule/Providers/auth_provider.dart';
 import 'package:capsule/Screens/homeScreen.dart';
 import 'package:capsule/Screens/signUp.dart';
+import 'package:capsule/Utils/shared_preference.dart';
 import 'package:capsule/widgets/appbar.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SigninOTP extends StatefulWidget {
   const SigninOTP({super.key});
@@ -11,8 +16,44 @@ class SigninOTP extends StatefulWidget {
 }
 
 class _SigninOTPState extends State<SigninOTP> {
+  TextEditingController otpController = TextEditingController();
+
+  Future<void> verifyOtp(BuildContext context) async {
+    AuthProvider auth = Provider.of<AuthProvider>(context, listen: false);
+
+    if (otpController.text != '') {
+      Map<String, dynamic> data = {
+        "mobile_no": auth.phone,
+        "otp_code": otpController.text,
+        "is_new_reg": 0,
+      };
+
+      final Map<String, dynamic> response = await auth.verifyOtp(data);
+
+      if (response['status']) {
+        Login user = await CapsulePreferences().getUser();
+        final query = {"user_id": user.userId};
+        await auth.getProfile(queryParams: query);
+        Navigator.pushReplacementNamed(context, '/home');
+      } else {
+        Flushbar(
+          title: "Failed",
+          message: response['message'].toString(),
+          duration: const Duration(seconds: 3),
+        ).show(context);
+      }
+    } else {
+      Flushbar(
+        title: 'Invalid phone numer',
+        message: 'Please enter valid otp number',
+        duration: Duration(seconds: 5),
+      ).show(context);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    AuthProvider auth = Provider.of<AuthProvider>(context, listen: false);
     return Scaffold(
       appBar: MyAppBar(),
       body: SingleChildScrollView(
@@ -35,7 +76,7 @@ class _SigninOTPState extends State<SigninOTP> {
                   height: 60,
                 ),
                 Text(
-                    "We have sent the code verification to your Mobile Number +9471 900855 ",
+                    "We have sent the code verification to your Mobile Number +94${auth.phone}",
                     textAlign: TextAlign.center,
                     style:
                         TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
@@ -51,6 +92,8 @@ class _SigninOTPState extends State<SigninOTP> {
                     border: Border.all(), // Add border
                   ),
                   child: TextFormField(
+                    controller: otpController,
+                    keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.symmetric(horizontal: 20),
                       hintText: 'Enter OTP',
@@ -73,10 +116,7 @@ class _SigninOTPState extends State<SigninOTP> {
                   ),
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => HomeScreen()),
-                      );
+                      verifyOtp(context);
                     },
                     style: ElevatedButton.styleFrom(
                       primary: Color(0xff2AB29D),
@@ -84,16 +124,19 @@ class _SigninOTPState extends State<SigninOTP> {
                         borderRadius: BorderRadius.all(Radius.circular(15)),
                       ),
                     ),
-                    child: Text(
-                      "SUBMIT",
-                      style: TextStyle(fontSize: 17),
+                    child: Consumer<AuthProvider>(
+                      builder: (context, auth, child) {
+                        return auth.isLoading
+                            ? CircularProgressIndicator()
+                            : Text("SUBMIT", style: TextStyle(fontSize: 18));
+                      },
                     ),
                   ),
                 ),
                 SizedBox(
                   height: 20,
                 ),
-                SizedBox(height:20),
+                SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

@@ -2,6 +2,9 @@ import 'package:capsule/Screens/eChannelling.dart';
 import 'package:flutter/material.dart';
 import 'package:capsule/Screens/uploadPrescription.dart';
 import 'package:capsule/widgets/appbar.dart';
+import 'package:provider/provider.dart';
+
+import '../../Providers/auth_provider.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -31,6 +34,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    AuthProvider auth = Provider.of<AuthProvider>(context, listen: false);
     return Scaffold(
       appBar: MyAppBar(),
       body: SingleChildScrollView(
@@ -48,7 +52,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     children: [
                       TextSpan(
-                        text: 'Hi Siva ',
+                        text: 'Hi ${auth.profile!.first_name} ',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
@@ -80,7 +84,7 @@ class _HomePageState extends State<HomePage> {
                     );
                   },
                   child: Container(
-                     margin: EdgeInsets.only(bottom: 16),
+                    margin: EdgeInsets.only(bottom: 16),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8),
                       child: Column(

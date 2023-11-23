@@ -1,23 +1,54 @@
-import 'package:capsule/Screens/afterBookNow.dart';
+import 'package:capsule/Providers/auth_provider.dart';
+import 'package:capsule/Providers/order_provider.dart';
+import 'package:capsule/Screens/SignIn.dart';
+import 'package:capsule/Screens/homeScreen.dart';
 import 'package:capsule/Screens/loadingPage.dart';
+import 'package:capsule/Screens/mainPage.dart';
 import 'package:capsule/Screens/orderPlaced.dart';
+import 'package:capsule/Screens/prepareOrder.dart';
+import 'package:capsule/Screens/signUp.dart';
+import 'package:capsule/Screens/signinOtpPage.dart';
+import 'package:capsule/Screens/signupOtpPage.dart';
+import 'package:capsule/Screens/verficationPage.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: MaterialApp(
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => OrderProvider()),
+      ],
+      child: SafeArea(
+        child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'Loading Page Example',
+          title: 'Capsule',
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          home: LoadingPage()),
+          home: LoadingPage(),
+          routes: {
+            '/loading': (context) => LoadingPage(),
+            '/home': (context) => HomeScreen(),
+            '/main': (context) => MainPage(),
+            '/sign-up': (context) => SignUp(),
+            '/signUp-otp': (context) => SignupOTP(),
+            '/sign-in': (context) => SignIn(),
+            '/signIn-otp': (context) => SigninOTP(),
+            '/verify': (context) => Verfication(),
+            '/prepare-order': (context) => PrepareOrder(),
+            '/order': (context) => OrderPlaced(),
+          },
+        ),
+      ),
     );
   }
 }
