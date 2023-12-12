@@ -50,7 +50,7 @@ class _MyOrdersPageState extends State<MyOrdersPage> {
     OrderProvider order = Provider.of<OrderProvider>(context, listen: false);
     return Scaffold(
       appBar: MyAppBar(),
-      body: list.isEmpty
+      body: order.isLoading
           ? Center(
               child: CircularProgressIndicator(),
             )

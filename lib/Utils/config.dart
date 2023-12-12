@@ -1,5 +1,5 @@
 class Config {
-  static const baseUrl = 'https://admin.capsulemedicare.com';
+  static const baseUrl = 'https://capsule.kodplex.com';
   static const getOtp = '$baseUrl/get_otp';
   static const verifyOtp = '$baseUrl/verify_otp';
   static const createProfie = '$baseUrl/create_profile';
