@@ -18,6 +18,8 @@ class _OrderPlacedState extends State<OrderPlaced> {
 
   late String itemId;
 
+  bool isButtonEnabled = false;
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -851,19 +853,33 @@ class _OrderPlacedState extends State<OrderPlaced> {
                             borderRadius: BorderRadius.all(Radius.circular(15)),
                           ),
                           child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => (Payment())),
-                              );
-                            },
+                            onPressed: isButtonEnabled
+                                ? () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Payment()),
+                                    );
+                                  }
+                                : null,
                             style: ElevatedButton.styleFrom(
-                              primary: const Color(0xff2AB29D),
                               shape: const RoundedRectangleBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(15)),
                               ),
+                            ).copyWith(
+                              backgroundColor:
+                                  MaterialStateProperty.resolveWith<Color>(
+                                      (Set<MaterialState> states) {
+                                if (states.contains(MaterialState.disabled)) {
+                                  // Color when the button is disabled
+                                  return Colors
+                                      .grey; // Change this to your desired color
+                                }
+                                // Color when the button is enabled
+                                return const Color(
+                                    0xff2AB29D); // Change this to your desired color
+                              }),
                             ),
                             child: const Text(
                               "PAY NOW",

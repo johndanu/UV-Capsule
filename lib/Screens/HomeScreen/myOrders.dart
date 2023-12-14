@@ -15,12 +15,15 @@ class MyOrdersPage extends StatefulWidget {
 class _MyOrdersPageState extends State<MyOrdersPage> {
   Future<List<Orders?>>? _ordersFuture;
 
-  String formatDate(String dateString) {
-    final inputFormat = DateFormat("yyyy-MM-dd HH:mm:ss");
-    final outputFormat = DateFormat("d 'of' MMM y");
+  String formatDate(String inputDateString) {
+    // Parse the input date string into a DateTime object
+    DateTime dateTime = DateTime.parse(inputDateString);
 
-    final date = inputFormat.parse(dateString);
-    final formattedDate = outputFormat.format(date);
+    // Define the date format you want
+    final DateFormat formatter = DateFormat('MMMM dd, yyyy');
+
+    // Format the DateTime into a string
+    String formattedDate = formatter.format(dateTime);
 
     return formattedDate;
   }
