@@ -32,7 +32,7 @@ class _UploadPrescriptionState extends State<UploadPrescription> {
 
       if (pickedImages != null) {
         setState(() {
-          images = pickedImages;
+          images = [...images, ...pickedImages];
         });
       }
     } catch (e) {
@@ -129,14 +129,14 @@ class _UploadPrescriptionState extends State<UploadPrescription> {
                                 );
                               },
                             ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
-                        child: Text(
-                          "Upload your prescription /\n Image",
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.w600),
-                        ),
-                      ),
+                      // Padding(
+                      //   padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
+                      //   child: Text(
+                      //     "Upload your prescription",
+                      //     style: TextStyle(
+                      //         fontSize: 20, fontWeight: FontWeight.w600),
+                      //   ),
+                      // ),
                       Center(
                         child: Padding(
                           padding: EdgeInsets.only(top: 160),

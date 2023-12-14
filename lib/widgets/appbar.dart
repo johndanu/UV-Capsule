@@ -34,16 +34,16 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
         ],
       ),
       actions: [
+        // IconButton(
+        //   icon: Icon(
+        //     Icons.help,
+        //     color: Colors.black38,
+        //   ),
+        //   onPressed: () {},
+        // ),
         IconButton(
           icon: Icon(
-            Icons.help,
-            color: Colors.black38,
-          ),
-          onPressed: () {},
-        ),
-        IconButton(
-          icon: Icon(
-            Icons.notifications,
+            Icons.logout,
             color: Colors.black38,
           ),
           onPressed: () {

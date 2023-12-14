@@ -158,7 +158,7 @@ class _OrderPlacedState extends State<OrderPlaced> {
                       Row(
                         children: [
                           Text(
-                            "date - ",
+                            "Date - ",
                             style: TextStyle(
                               fontSize: 14,
                             ),
@@ -224,14 +224,24 @@ class _OrderPlacedState extends State<OrderPlaced> {
 
                       Container(
                         decoration: BoxDecoration(
-                            color: const Color(0xffFFC794),
-                            borderRadius: BorderRadius.circular(15)),
-                        height: 25,
-                        width: 130,
-                        child: Center(
-                          child: Text(
-                            data.status,
-                            style: TextStyle(color: Colors.white),
+                          color: const Color(0xffFFC794),
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        constraints: BoxConstraints(
+                          maxHeight: 30,
+                          maxWidth:
+                              200, // Set a maximum width to prevent it from becoming too wide
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Center(
+                            child: Text(
+                              data.status,
+                              style: TextStyle(color: Colors.white),
+                              textAlign: TextAlign.center,
+                              overflow: TextOverflow
+                                  .ellipsis, // Handle overflow with ellipsis
+                            ),
                           ),
                         ),
                       ),
