@@ -30,9 +30,22 @@ class _UploadPrescriptionState extends State<UploadPrescription> {
     try {
       final pickedImages = await _picker.pickMultiImage();
 
-      if (pickedImages != null) {
+      if (pickedImages != null && pickedImages.isNotEmpty) {
+        // Extract unique hash codes from the existing images
+        final existingName = images.map((image) => image.name).toList();
+
+        print(existingName);
+
+        // Add new unique images based on hash codes from pickedImages
+        final newImages = pickedImages.where((pickedImage) {
+          print(pickedImage.hashCode);
+
+          return !existingName.contains(pickedImage.name);
+        }).toList();
+
         setState(() {
-          images = [...images, ...pickedImages];
+          // Combine existing images with new unique images
+          images = [...images, ...newImages];
         });
       }
     } catch (e) {
@@ -123,12 +136,21 @@ class _UploadPrescriptionState extends State<UploadPrescription> {
                               ),
                               itemCount: images.length,
                               itemBuilder: (context, index) {
-                                return Image.file(
-                                  File(images[index].path),
-                                  fit: BoxFit.cover,
+                                return GestureDetector(
+                                  onTap: () {
+                                    // Remove the image from the list when clicked
+                                    setState(() {
+                                      images.removeAt(index);
+                                    });
+                                  },
+                                  child: Image.file(
+                                    File(images[index].path),
+                                    fit: BoxFit.cover,
+                                  ),
                                 );
                               },
                             ),
+
                       // Padding(
                       //   padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
                       //   child: Text(

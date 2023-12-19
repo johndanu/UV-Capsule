@@ -22,7 +22,6 @@ class _LoadingPageState extends State<LoadingPage> {
 
   void loading() async {
     Login data = await CapsulePreferences().getUser();
-    OrderProvider order = Provider.of<OrderProvider>(context, listen: false);
     AuthProvider auth = Provider.of<AuthProvider>(context, listen: false);
 
     if (data.userId != null) {

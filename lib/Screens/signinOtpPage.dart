@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:another_flushbar/flushbar.dart';
 import 'package:capsule/Models/auth_model.dart';
 import 'package:capsule/Providers/auth_provider.dart';
@@ -18,8 +20,13 @@ class SigninOTP extends StatefulWidget {
 class _SigninOTPState extends State<SigninOTP> {
   TextEditingController otpController = TextEditingController();
 
+  String? error;
+
   Future<void> verifyOtp(BuildContext context) async {
     AuthProvider auth = Provider.of<AuthProvider>(context, listen: false);
+    setState(() {
+      error = null;
+    });
 
     if (otpController.text != '') {
       Map<String, dynamic> data = {
@@ -36,18 +43,25 @@ class _SigninOTPState extends State<SigninOTP> {
         await auth.getProfile(queryParams: query);
         Navigator.pushReplacementNamed(context, '/home');
       } else {
-        Flushbar(
-          title: "Failed",
-          message: response['message'].toString(),
-          duration: const Duration(seconds: 3),
-        ).show(context);
+        // Flushbar(
+        //   title: "Failed",
+        //   message: response['message'].toString(),
+        //   duration: const Duration(seconds: 3),
+        // ).show(context);
+
+        setState(() {
+          error = response['message'].toString();
+        });
       }
     } else {
-      Flushbar(
-        title: 'Invalid phone numer',
-        message: 'Please enter valid otp number',
-        duration: Duration(seconds: 5),
-      ).show(context);
+      // Flushbar(
+      //   title: 'Invalid phone numer',
+      //   message: 'Please enter valid otp number',
+      //   duration: Duration(seconds: 5),
+      // ).show(context);
+      setState(() {
+        error = 'Please enter valid otp number';
+      });
     }
   }
 
@@ -104,6 +118,14 @@ class _SigninOTPState extends State<SigninOTP> {
                     ),
                   ),
                 ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(error ?? "",
+                    style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w600,
+                        color: Color.fromARGB(255, 184, 41, 41))),
                 SizedBox(
                   height: 30,
                 ),

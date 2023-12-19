@@ -38,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
               index: _selectedIndex,
               children: [
                 HomePage(),
-                MyOrdersPage(),
+                MyOrdersPage(key: UniqueKey()),
                 ProfilePage(),
               ],
             ),
@@ -50,7 +50,6 @@ class _HomeScreenState extends State<HomeScreen> {
         onTap: _onItemTapped,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-         
             icon: Icon(Icons.home),
             label: 'Home',
           ),

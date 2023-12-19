@@ -15,9 +15,14 @@ class SignupOTP extends StatefulWidget {
 
 class _SignupOTPState extends State<SignupOTP> {
   TextEditingController otpController = TextEditingController();
+  String? error;
 
   Future<void> verifyOtp(BuildContext context) async {
     AuthProvider auth = Provider.of<AuthProvider>(context, listen: false);
+
+    setState(() {
+      error = null;
+    });
 
     if (otpController.text != '') {
       Map<String, dynamic> data = {
@@ -31,18 +36,25 @@ class _SignupOTPState extends State<SignupOTP> {
       if (response['status']) {
         Navigator.pushReplacementNamed(context, '/verify');
       } else {
-        Flushbar(
-          title: "Failed",
-          message: response['message'].toString(),
-          duration: const Duration(seconds: 3),
-        ).show(context);
+        // Flushbar(
+        //   title: "Failed",
+        //   message: response['message'].toString(),
+        //   duration: const Duration(seconds: 3),
+        // ).show(context);
+        setState(() {
+          error = response['message'].toString();
+        });
       }
     } else {
-      Flushbar(
-        title: 'Invalid phone numer',
-        message: 'Please enter valid otp number',
-        duration: Duration(seconds: 5),
-      ).show(context);
+      // Flushbar(
+      //   title: 'Invalid phone numer',
+      //   message: 'Please enter valid otp number',
+      //   duration: Duration(seconds: 5),
+      // ).show(context);
+
+      setState(() {
+        error = 'Please enter valid otp number';
+      });
     }
   }
 
@@ -98,6 +110,14 @@ class _SignupOTPState extends State<SignupOTP> {
                     ),
                   ),
                 ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(error ?? "",
+                    style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w600,
+                        color: Color.fromARGB(255, 184, 41, 41))),
                 SizedBox(
                   height: 40,
                 ),

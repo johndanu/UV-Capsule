@@ -20,6 +20,8 @@ class _SignInState extends State<SignIn> {
   TextEditingController phoneNumberController = TextEditingController();
   bool resent = false;
 
+  String? error;
+
   @override
   void initState() {
     super.initState();
@@ -34,6 +36,7 @@ class _SignInState extends State<SignIn> {
     AuthProvider auth = Provider.of<AuthProvider>(context, listen: false);
     setState(() {
       resent = false;
+      error = null;
     });
     if (phoneNumberController.text != '') {
       Map<String, dynamic> data = {
@@ -46,11 +49,14 @@ class _SignInState extends State<SignIn> {
       if (response['status']) {
         Navigator.pushNamed(context, '/signIn-otp');
       } else {
-        Flushbar(
-          title: "Failed",
-          message: response['message'].toString(),
-          duration: const Duration(seconds: 3),
-        ).show(context);
+        // Flushbar(
+        //   title: "Failed",
+        //   message: response['message'].toString(),
+        //   duration: const Duration(seconds: 3),
+        // ).show(context);
+        setState(() {
+          error = response['message'].toString();
+        });
       }
 
       Timer(Duration(minutes: 3), () {
@@ -59,11 +65,14 @@ class _SignInState extends State<SignIn> {
         });
       });
     } else {
-      Flushbar(
-        title: 'Invalid phone numer',
-        message: 'Please enter valid phone number',
-        duration: Duration(seconds: 5),
-      ).show(context);
+      // Flushbar(
+      //   title: 'Invalid phone numer',
+      //   message: 'Please enter valid phone number',
+      //   duration: Duration(seconds: 5),
+      // ).show(context);
+      setState(() {
+        error = 'Please enter valid phone number';
+      });
     }
   }
 
@@ -110,6 +119,13 @@ class _SignInState extends State<SignIn> {
                     phoneNumberController.text = '';
                   }
                 },
+              ),
+              Center(
+                child: Text(error ?? "",
+                    style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w600,
+                        color: Color.fromARGB(255, 184, 41, 41))),
               ),
               SizedBox(
                 height: 10,

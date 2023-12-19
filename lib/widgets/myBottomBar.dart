@@ -45,15 +45,15 @@ class _MyBottomBarState extends State<MyBottomBar> {
         padding: const EdgeInsets.symmetric(vertical: 5),
         child: Column(
           mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-           
-             Icon(
-                icon,
-                color: buttonColor,
-              ),
-             
-          SizedBox(height: 2,),
+            Icon(
+              icon,
+              color: buttonColor,
+            ),
+            SizedBox(
+              height: 2,
+            ),
             Text(text),
           ],
         ),

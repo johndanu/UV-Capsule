@@ -20,6 +20,7 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   TextEditingController phoneNumberController = TextEditingController();
   bool resent = false;
+  String? error;
 
   @override
   void initState() {
@@ -35,6 +36,7 @@ class _SignUpState extends State<SignUp> {
     AuthProvider auth = Provider.of<AuthProvider>(context, listen: false);
     setState(() {
       resent = false;
+      error = null;
     });
     if (phoneNumberController.text != '') {
       Map<String, dynamic> data = {
@@ -47,11 +49,15 @@ class _SignUpState extends State<SignUp> {
       if (response['status']) {
         Navigator.pushNamed(context, '/signUp-otp');
       } else {
-        Flushbar(
-          title: "Failed",
-          message: response['message'].toString(),
-          duration: const Duration(seconds: 3),
-        ).show(context);
+        // Flushbar(
+        //   title: "Failed",
+        //   message: response['message'].toString(),
+        //   duration: const Duration(seconds: 3),
+        // ).show(context);
+
+        setState(() {
+          error = response['message'].toString();
+        });
       }
 
       Timer(Duration(minutes: 1), () {
@@ -60,11 +66,15 @@ class _SignUpState extends State<SignUp> {
         });
       });
     } else {
-      Flushbar(
-        title: 'Invalid phone numer',
-        message: 'Please enter valid phone number',
-        duration: Duration(seconds: 5),
-      ).show(context);
+      // Flushbar(
+      //   title: 'Invalid phone numer',
+      //   message: 'Please enter valid phone number',
+      //   duration: Duration(seconds: 5),
+      // ).show(context);
+
+      setState(() {
+        error = 'Please enter valid phone number';
+      });
     }
   }
 
@@ -112,6 +122,13 @@ class _SignUpState extends State<SignUp> {
                     phoneNumberController.text = '';
                   }
                 },
+              ),
+              Center(
+                child: Text(error ?? "",
+                    style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w600,
+                        color: Color.fromARGB(255, 184, 41, 41))),
               ),
               SizedBox(
                 height: 10,

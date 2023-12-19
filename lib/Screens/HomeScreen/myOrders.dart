@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class MyOrdersPage extends StatefulWidget {
+  MyOrdersPage({Key? key}) : super(key: key);
   @override
   _MyOrdersPageState createState() => _MyOrdersPageState();
 }
@@ -31,8 +32,17 @@ class _MyOrdersPageState extends State<MyOrdersPage> {
   @override
   void initState() {
     super.initState();
-    print('object');
     _ordersFuture = fetch(); // Move initialization to initState
+  }
+
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    // Check if this widget is currently the top route
+    if (ModalRoute.of(context)?.isCurrent ?? false) {
+      // Execute your function here
+      _ordersFuture = fetch(); // Move initialization to initState
+    }
   }
 
   Future<List<Orders>> fetch() async {

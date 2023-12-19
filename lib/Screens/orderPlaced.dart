@@ -370,8 +370,9 @@ class _OrderPlacedState extends State<OrderPlaced> {
                                             'TOTAL PRICE',
                                             style: const TextStyle(
                                                 color: Colors.black,
+                                                overflow: TextOverflow.ellipsis,
                                                 fontWeight: FontWeight.w600,
-                                                fontSize: 15),
+                                                fontSize: 14),
                                           ),
                                         ),
                                       ),
@@ -394,8 +395,9 @@ class _OrderPlacedState extends State<OrderPlaced> {
                                               .toStringAsFixed(2),
                                           style: const TextStyle(
                                               color: Colors.black,
+                                              overflow: TextOverflow.ellipsis,
                                               fontWeight: FontWeight.w600,
-                                              fontSize: 15),
+                                              fontSize: 14),
                                         ),
                                       ),
                                     ),
