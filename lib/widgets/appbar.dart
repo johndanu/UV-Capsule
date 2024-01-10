@@ -3,6 +3,7 @@ import 'package:capsule/Providers/auth_provider.dart';
 import 'package:capsule/Utils/shared_preference.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
@@ -11,6 +12,40 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   void logout(BuildContext context) async {
     await CapsulePreferences().clearAll();
     Navigator.pushReplacementNamed(context, '/main');
+  }
+
+  void _launchWhatsApp(BuildContext context) async {
+    const whatsappNumber = "+1234567890"; // Replace with your WhatsApp number
+    const message = "Hi, I need your assistance";
+    var whatsappUrl = "whatsapp://send?phone=$whatsappNumber&text=$message";
+
+    Uri uri = Uri.parse(whatsappUrl);
+    print(uri);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("WhatsApp is not installed on the device"),
+        ),
+      );
+    }
+  }
+
+  void _makePhoneCall(BuildContext context) async {
+    const phoneNumber =
+        'tel:+1234567890'; // Replace with your desired phone number
+    Uri phoneNumber1 = Uri.parse(phoneNumber);
+
+    if (await canLaunchUrl(phoneNumber1)) {
+      await launchUrl(phoneNumber1);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Unable to launch phone app"),
+        ),
+      );
+    }
   }
 
   @override
@@ -71,14 +106,25 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
               ],
             ),
             actions: [
-              // IconButton(
-              //   icon: Icon(
-              //     Icons.help,
-              //     color: Colors.black38,
-              //   ),
-              //   onPressed: () {},
-              // ),
-              if (loggedIn)
+              IconButton(
+                icon: Icon(
+                  Icons.message,
+                  color: Colors.black38,
+                ),
+                onPressed: () {
+                  _launchWhatsApp(context);
+                },
+              ),
+              IconButton(
+                icon: Icon(
+                  Icons.call,
+                  color: Colors.black38,
+                ),
+                onPressed: () {
+                  _makePhoneCall(context);
+                },
+              ),
+              if (loggedIn) // Conditional widget rendering
                 IconButton(
                   icon: Icon(
                     Icons.logout,

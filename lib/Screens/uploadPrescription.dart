@@ -26,26 +26,12 @@ class _UploadPrescriptionState extends State<UploadPrescription> {
   TextEditingController customerAddressController = TextEditingController();
   TextEditingController remarksController = TextEditingController();
 
-  Future<void> _pickImage() async {
+  Future<void> _pickImage(ImageSource source) async {
     try {
-      final pickedImages = await _picker.pickMultiImage();
-
-      if (pickedImages != null && pickedImages.isNotEmpty) {
-        // Extract unique hash codes from the existing images
-        final existingName = images.map((image) => image.name).toList();
-
-        print(existingName);
-
-        // Add new unique images based on hash codes from pickedImages
-        final newImages = pickedImages.where((pickedImage) {
-          print(pickedImage.hashCode);
-
-          return !existingName.contains(pickedImage.name);
-        }).toList();
-
+      final pickedImage = await _picker.pickImage(source: source);
+      if (pickedImage != null) {
         setState(() {
-          // Combine existing images with new unique images
-          images = [...images, ...newImages];
+          images.add(pickedImage);
         });
       }
     } catch (e) {
@@ -102,6 +88,35 @@ class _UploadPrescriptionState extends State<UploadPrescription> {
       customerPhoneController.text = '';
       customerAddressController.text = '';
     }
+  }
+
+  Future<void> _showImageSourceDialog() async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text("Choose the image source"),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                ListTile(
+                  title: Text("Camera"),
+                  onTap: () {
+                    Navigator.of(context).pop();
+                    _pickImage(ImageSource.camera);
+                  },
+                ),
+                ListTile(
+                  title: Text("Gallery"),
+                  onTap: () {
+                    Navigator.of(context).pop();
+                    _pickImage(ImageSource.gallery);
+                  },
+                ),
+              ],
+            ),
+          );
+        });
   }
 
   @override
@@ -164,7 +179,7 @@ class _UploadPrescriptionState extends State<UploadPrescription> {
                           padding: EdgeInsets.only(top: 160),
                           child: IconButton(
                             onPressed: () {
-                              _pickImage();
+                              _showImageSourceDialog();
                             },
                             icon: Icon(
                               Icons.add_circle,
