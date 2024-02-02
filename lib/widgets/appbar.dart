@@ -15,10 +15,10 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   void _launchWhatsApp(BuildContext context) async {
-    const whatsappNumber = "+1234567890"; // Replace with your WhatsApp number
+    const whatsappNumber = "+94774288892"; // Replace with your WhatsApp number
     const message = "Hi, I need your assistance";
-    var whatsappUrl = "whatsapp://send?phone=$whatsappNumber&text=$message";
-
+    var whatsappUrl =
+        "whatsapp://send?phone=$whatsappNumber&text=${Uri.encodeFull(message)}";
     Uri uri = Uri.parse(whatsappUrl);
     print(uri);
     if (await canLaunchUrl(uri)) {

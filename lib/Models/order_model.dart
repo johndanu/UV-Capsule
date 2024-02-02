@@ -30,6 +30,8 @@ class Order {
   final String? delivery_person;
   final String? deliver_at;
   final String? quantity;
+  final payment_method;
+  final String? is_paid;
   final int payment_amount;
   final List medicines;
   final List images;
@@ -43,6 +45,8 @@ class Order {
     required this.delivery_address,
     required this.delivery_person,
     required this.quantity,
+    required this.payment_method,
+    required this.is_paid,
     required this.deliver_at,
     required this.payment_amount,
     required this.medicines,
@@ -59,6 +63,8 @@ class Order {
       delivery_address: responseData['delivery_address'],
       delivery_person: responseData['delivery_person'],
       quantity: responseData['quantity'],
+      payment_method: responseData['payment_method'],
+      is_paid: responseData['is_paid'],
       deliver_at: responseData['deliver_at'],
       payment_amount: responseData['payment_amount'],
       medicines: responseData['medicines'],

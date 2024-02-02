@@ -1,8 +1,14 @@
+import 'dart:ffi';
+
 import 'package:capsule/Models/order_model.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
 import 'package:capsule/Providers/auth_provider.dart';
 import 'package:capsule/Providers/order_provider.dart';
 import 'package:capsule/Screens/payment.dart';
 import 'package:capsule/widgets/appbar.dart';
+import 'package:capsule/Utils/config.dart';
 import 'package:capsule/widgets/myBottomBar.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -19,6 +25,7 @@ class _OrderPlacedState extends State<OrderPlaced> {
   late String itemId;
 
   bool isButtonEnabled = false;
+  bool isCashOnDeliveryEnabled = false;
 
   @override
   void didChangeDependencies() {
@@ -30,6 +37,59 @@ class _OrderPlacedState extends State<OrderPlaced> {
       // Fetch data based on itemId here
     } else {
       // Handle the case where the argument is not of the expected type
+    }
+  }
+
+  Future<void> submitOrder(
+      BuildContext context, dynamic orderId, String paymentMethod) async {
+    const String endpoint = Config.peymentMehod;
+    print(orderId);
+
+    try {
+      final response = await http.put(
+        Uri.parse(endpoint),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode(<String, dynamic>{
+          '"orderId"': orderId,
+          '"payment_method"': paymentMethod,
+        }),
+      );
+
+      print(
+          'Response Status: ${response.statusCode}'); // Logging response status
+      print('Response Body: ${response.body}'); // Logging response body
+
+      if (response.statusCode == 200) {
+        // If the server returns a 200 OK response, show a success message to the user.
+        print('success');
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Your order has been successfully submitted!'),
+            duration: Duration(seconds: 2), // Adjust as needed
+          ),
+        );
+      } else {
+        // If the server did not return a 200 OK response,
+        // throw an exception.
+        print('exception');
+        throw Exception('Failed to submit order');
+      }
+    } catch (e) {
+      // Handle any errors here
+      print(e);
+
+      // Optionally show an error message to the user...
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Failed to submit order. Please try again.'),
+          duration: Duration(seconds: 2), // Adjust as needed
+          backgroundColor:
+              Colors.red, // Optionally customize the background color
+        ),
+      );
     }
   }
 
@@ -72,6 +132,7 @@ class _OrderPlacedState extends State<OrderPlaced> {
               return Text('No data available.');
             } else {
               final data = snapshot.data;
+
               return SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.all(24.0),
@@ -177,26 +238,30 @@ class _OrderPlacedState extends State<OrderPlaced> {
                           )
                         ],
                       ),
-                      Row(
-                        children: [
-                          Text(
-                            "Quantity - ",
-                            style: TextStyle(
-                              fontSize: 14,
-                            ),
-                            textAlign: TextAlign.left,
-                          ),
-                          Center(
-                            child: Text(
-                              data.quantity ?? '',
-                              style: TextStyle(
-                                fontSize: 14,
-                              ),
-                              textAlign: TextAlign.end,
-                            ),
-                          )
-                        ],
-                      ),
+                      data.quantity?.isNotEmpty == true
+                          ? Row(
+                              children: [
+                                Text(
+                                  "Quantity - ",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                  ),
+                                  textAlign: TextAlign.left,
+                                ),
+                                Center(
+                                  child: Text(
+                                    data.quantity ??
+                                        '', // Provide a default empty string if data.quantity is null
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                    ),
+                                    textAlign: TextAlign.end,
+                                  ),
+                                )
+                              ],
+                            )
+                          : SizedBox
+                              .shrink(), // Returns an empty box if data.quantity is null or empty
                       Row(
                         children: [
                           Text(
@@ -208,7 +273,7 @@ class _OrderPlacedState extends State<OrderPlaced> {
                           ),
                           Center(
                             child: Text(
-                              "LKR ${data.payment_amount}",
+                              "LKR ${NumberFormat('#,##0.00', 'en_US').format(data.payment_amount)}",
                               style: TextStyle(
                                 fontSize: 14,
                               ),
@@ -359,45 +424,46 @@ class _OrderPlacedState extends State<OrderPlaced> {
                                   cells: [
                                     DataCell(
                                       Container(
-                                        width: double.infinity,
                                         padding: const EdgeInsets.all(8.0),
                                         margin: const EdgeInsets.all(4.0),
-                                        decoration: const BoxDecoration(
-                                          color: Color(0xffE0FEF7),
+                                        decoration: BoxDecoration(
+                                          color: const Color(0xffE0FEF7),
                                         ),
-                                        child: Expanded(
-                                          child: Text(
-                                            'TOTAL PRICE',
-                                            style: const TextStyle(
-                                                color: Colors.black,
-                                                overflow: TextOverflow.ellipsis,
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 14),
+                                        child: Text(
+                                          'TOTAL PRICE',
+                                          style: const TextStyle(
+                                            color: Colors.black,
+                                            overflow: TextOverflow.ellipsis,
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 14,
                                           ),
                                         ),
                                       ),
                                     ),
                                     DataCell(
                                       Container(
-                                        child: Text(
-                                          '',
+                                        padding: const EdgeInsets.all(8.0),
+                                        decoration: BoxDecoration(
+                                          color: const Color(0xffE0FEF7),
                                         ),
+                                        child: Text(''),
                                       ),
                                     ),
                                     DataCell(
                                       Container(
                                         padding: const EdgeInsets.all(8.0),
-                                        decoration: const BoxDecoration(
-                                          color: Color(0xffE0FEF7),
+                                        decoration: BoxDecoration(
+                                          color: const Color(0xffE0FEF7),
                                         ),
                                         child: Text(
                                           data.payment_amount
                                               .toStringAsFixed(2),
                                           style: const TextStyle(
-                                              color: Colors.black,
-                                              overflow: TextOverflow.ellipsis,
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 14),
+                                            color: Colors.black,
+                                            overflow: TextOverflow.ellipsis,
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 14,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -408,6 +474,35 @@ class _OrderPlacedState extends State<OrderPlaced> {
                       const SizedBox(
                         height: 40,
                       ),
+                      if (data.payment_method != null &&
+                          data.payment_method.toString().trim().isNotEmpty)
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 246, 234, 223),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          constraints: BoxConstraints(
+                            maxHeight: 30,
+                            maxWidth:
+                                200, // Set a maximum width to prevent it from becoming too wide
+                          ),
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Center(
+                              child: Text(
+                                data.payment_method.toString(),
+                                style: TextStyle(
+                                    color:
+                                        const Color.fromARGB(255, 24, 24, 24)),
+                                textAlign: TextAlign.center,
+                                overflow: TextOverflow
+                                    .ellipsis, // Handle overflow with ellipsis
+                              ),
+                            ),
+                          ),
+                        ),
+
                       const Text(
                         "Order Status",
                         style: TextStyle(
@@ -587,13 +682,14 @@ class _OrderPlacedState extends State<OrderPlaced> {
                                     children: [
                                       Column(
                                         children: [
-                                          data.status == "Paid" ||
-                                                  data.status ==
-                                                      "Ready for Delivery" ||
-                                                  data.status ==
-                                                      "On Delivery" ||
-                                                  data.status ==
-                                                      "Order Finished"
+                                          (data.status == "Paid" ||
+                                                      data.status ==
+                                                          "Ready for Delivery" ||
+                                                      data.status ==
+                                                          "On Delivery" ||
+                                                      data.status ==
+                                                          "Order Finished") &&
+                                                  data.is_paid == '1'
                                               ? CircleAvatar(
                                                   backgroundColor:
                                                       Color(0xff18645B),
@@ -625,13 +721,14 @@ class _OrderPlacedState extends State<OrderPlaced> {
                                                     ),
                                                   ),
                                                 ),
-                                          data.status == "Paid" ||
-                                                  data.status ==
-                                                      "Ready for Delivery" ||
-                                                  data.status ==
-                                                      "On Delivery" ||
-                                                  data.status ==
-                                                      "Order Finished"
+                                          (data.status == "Paid" ||
+                                                      data.status ==
+                                                          "Ready for Delivery" ||
+                                                      data.status ==
+                                                          "On Delivery" ||
+                                                      data.status ==
+                                                          "Order Finished") &&
+                                                  data.is_paid == '1'
                                               ? Container(
                                                   width: 2,
                                                   height: 40,
@@ -846,49 +943,130 @@ class _OrderPlacedState extends State<OrderPlaced> {
                           )),
                       const SizedBox(height: 30),
                       if (data.status == "Order Placed" ||
-                          data.status == "Merchant Confirmed")
-                        Container(
-                          height: 50,
-                          width: double.infinity,
-                          decoration: const BoxDecoration(
-                            color: Color(0xff2AB29D),
-                            borderRadius: BorderRadius.all(Radius.circular(15)),
-                          ),
-                          child: ElevatedButton(
-                            onPressed: isButtonEnabled
-                                ? () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Payment()),
-                                    );
-                                  }
-                                : null,
-                            style: ElevatedButton.styleFrom(
-                              shape: const RoundedRectangleBorder(
+                          data.status == "Merchant Confirmed" ||
+                          true)
+                        Column(
+                          children: [
+                            Container(
+                              height: 50,
+                              width: double.infinity,
+                              decoration: const BoxDecoration(
+                                color: Color(0xff2AB29D),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(15)),
                               ),
-                            ).copyWith(
-                              backgroundColor:
-                                  MaterialStateProperty.resolveWith<Color>(
-                                      (Set<MaterialState> states) {
-                                if (states.contains(MaterialState.disabled)) {
-                                  // Color when the button is disabled
-                                  return Colors
-                                      .grey; // Change this to your desired color
-                                }
-                                // Color when the button is enabled
-                                return const Color(
-                                    0xff2AB29D); // Change this to your desired color
-                              }),
+                              child: ElevatedButton(
+                                onPressed: isButtonEnabled
+                                    ? () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => Payment()),
+                                        );
+                                      }
+                                    : null,
+                                style: ElevatedButton.styleFrom(
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(15)),
+                                  ),
+                                ).copyWith(
+                                  backgroundColor:
+                                      MaterialStateProperty.resolveWith<Color>(
+                                          (Set<MaterialState> states) {
+                                    if (states
+                                        .contains(MaterialState.disabled)) {
+                                      return Colors.grey;
+                                    }
+                                    return const Color(0xff2AB29D);
+                                  }),
+                                ),
+                                child: const Text(
+                                  "PAY NOW",
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                              ),
                             ),
-                            child: const Text(
-                              "PAY NOW",
-                              style: TextStyle(fontSize: 18),
+                            SizedBox(height: 10),
+                            Container(
+                              height: 50,
+                              width: double.infinity,
+                              decoration: const BoxDecoration(
+                                color: Color(0xff2AB29D),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(15)),
+                              ),
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  submitOrder(context, data.order_id,
+                                      'Card on Delivery');
+                                  print('Button Clicked');
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(15)),
+                                  ),
+                                ).copyWith(
+                                  backgroundColor:
+                                      MaterialStateProperty.resolveWith<Color>(
+                                          (Set<MaterialState> states) {
+                                    if (states
+                                        .contains(MaterialState.disabled)) {
+                                      return Colors.grey;
+                                    }
+                                    return const Color(0xff2AB29D);
+                                  }),
+                                ),
+                                child: const Text(
+                                  "CARD ON DELIVERY",
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
+                            SizedBox(height: 10), // Spacing between buttons
+                            Container(
+                              height: 50,
+                              width: double.infinity,
+                              decoration: const BoxDecoration(
+                                color: Color(
+                                    0xffFCCA5C), // Different color for differentiation
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(15)),
+                              ),
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  // TODO: Implement action for Cash on Delivery
+                                  submitOrder(context, data.order_id,
+                                      'Cash on Delivery');
+                                  print('Button Clicked');
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(15)),
+                                  ),
+                                ).copyWith(
+                                  backgroundColor:
+                                      MaterialStateProperty.resolveWith<Color>(
+                                          (Set<MaterialState> states) {
+                                    if (states
+                                        .contains(MaterialState.disabled)) {
+                                      return Colors
+                                          .grey; // Disabled color for this button
+                                    }
+                                    return const Color(
+                                        0xffFCCA5C); // Enabled color for this button
+                                  }),
+                                ),
+                                child: const Text(
+                                  "CASH ON DELIVERY",
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
                     ],
                   ),
                 ),

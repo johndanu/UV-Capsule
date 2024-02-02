@@ -156,6 +156,9 @@ class OrderProvider extends ChangeNotifier {
       notifyListeners();
 
       final response = await http.get(Uri.parse(apiUrl), headers: headers);
+      print(
+          'Response Status: ${response.statusCode}'); // Logging response status
+      print('Response Body: ${response.body}'); // Logging response body
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);

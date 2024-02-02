@@ -119,14 +119,6 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => EChannelling(),
-                    ),
-                  );
-                },
                 child: Container(
                   margin: EdgeInsets.only(bottom: 16),
                   child: ClipRRect(
@@ -151,53 +143,7 @@ class _HomePageState extends State<HomePage> {
                           padding: EdgeInsets.all(8),
                           child: Center(
                             child: Text(
-                              'Doctor Channelling',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 17,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => EChannelling(),
-                  //   ),
-                  // );
-                },
-                child: Container(
-                  margin: EdgeInsets.only(bottom: 16),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          width: double.infinity,
-                          child: Image.asset(
-                            'assets/images/img4.jpeg',
-                            height: 200,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: Color(0xff2AB29D),
-                          padding: EdgeInsets.all(8),
-                          child: Center(
-                            child: Text(
-                              'Veterinary',
+                              'Grocery ordering',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 17,
