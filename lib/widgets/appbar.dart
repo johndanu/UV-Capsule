@@ -38,7 +38,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   void _makePhoneCall(BuildContext context) async {
     const phoneNumber =
-        'tel:+1234567890'; // Replace with your desired phone number
+        'tel:+94774288892'; // Replace with your desired phone number
     Uri phoneNumber1 = Uri.parse(phoneNumber);
 
     if (await canLaunchUrl(phoneNumber1)) {
