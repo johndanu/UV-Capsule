@@ -45,29 +45,28 @@ class _OrderPlacedState extends State<OrderPlaced> {
     const String endpoint = Config.peymentMehod;
     print(orderId);
 
+    final dataFinal = jsonEncode(<dynamic, dynamic>{
+      'order_id': orderId,
+      'payment_method': paymentMethod,
+    });
     try {
-      final response = await http.put(
-        Uri.parse(endpoint),
-        headers: <String, String>{
-          'Content-Type': 'application/json',
-        },
-        body: jsonEncode(<String, dynamic>{
-          '"orderId"': orderId,
-          '"payment_method"': paymentMethod,
-        }),
-      );
+      final response = await http.put(Uri.parse(endpoint),
+          headers: <String, String>{
+            'Content-Type': 'application/json',
+          },
+          body: dataFinal);
 
       print(
           'Response Status: ${response.statusCode}'); // Logging response status
       print('Response Body: ${response.body}'); // Logging response body
-
+      print(dataFinal);
       if (response.statusCode == 200) {
         // If the server returns a 200 OK response, show a success message to the user.
         print('success');
 
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Your order has been successfully submitted!'),
+            content: Text('Your Payment Method is Changed'),
             duration: Duration(seconds: 2), // Adjust as needed
           ),
         );
@@ -474,34 +473,6 @@ class _OrderPlacedState extends State<OrderPlaced> {
                       const SizedBox(
                         height: 40,
                       ),
-                      if (data.payment_method != null &&
-                          data.payment_method.toString().trim().isNotEmpty)
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 246, 234, 223),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          constraints: BoxConstraints(
-                            maxHeight: 30,
-                            maxWidth:
-                                200, // Set a maximum width to prevent it from becoming too wide
-                          ),
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 8.0),
-                            child: Center(
-                              child: Text(
-                                data.payment_method.toString(),
-                                style: TextStyle(
-                                    color:
-                                        const Color.fromARGB(255, 24, 24, 24)),
-                                textAlign: TextAlign.center,
-                                overflow: TextOverflow
-                                    .ellipsis, // Handle overflow with ellipsis
-                              ),
-                            ),
-                          ),
-                        ),
 
                       const Text(
                         "Order Status",
@@ -671,7 +642,36 @@ class _OrderPlacedState extends State<OrderPlaced> {
                                         style: TextStyle(
                                             fontWeight: FontWeight.w600,
                                             fontSize: 15),
-                                      )
+                                      ),
+                                      if (data.payment_method != null &&
+                                          data.payment_method
+                                              .toString()
+                                              .trim()
+                                              .isNotEmpty)
+                                        Padding(
+                                          padding: EdgeInsets.all(2),
+                                          child: Container(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 4,
+                                                vertical:
+                                                    1), // Inner padding for the text
+                                            decoration: BoxDecoration(
+                                              color: Colors
+                                                  .orange, // Background color
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                      8), // Border radius
+                                            ),
+                                            child: Text(
+                                              data.payment_method,
+                                              style: TextStyle(
+                                                color:
+                                                    Colors.white, // Text color
+                                              ),
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ),
+                                        ),
                                     ],
                                   ),
                                 ),

@@ -1,4 +1,7 @@
 import 'package:capsule/Models/auth_model.dart';
+import 'package:iconify_flutter/iconify_flutter.dart';
+import 'package:iconify_flutter/icons/mdi.dart'; // Import the specific icon set
+
 import 'package:capsule/Providers/auth_provider.dart';
 import 'package:capsule/Utils/shared_preference.dart';
 import 'package:flutter/material.dart';
@@ -18,18 +21,19 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
     const whatsappNumber = "+94774288892"; // Replace with your WhatsApp number
     const message = "Hi, I need your assistance";
     var whatsappUrl =
-        "whatsapp://send?phone=$whatsappNumber&text=${Uri.encodeFull(message)}";
+        "https://wa.me/$whatsappNumber?text=${Uri.encodeFull(message)}";
     Uri uri = Uri.parse(whatsappUrl);
     print(uri);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri);
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("WhatsApp is not installed on the device"),
-        ),
-      );
-    }
+    await launchUrl(uri);
+    // if (await canLaunchUrl(uri)) {
+    //   await launchUrl(uri);
+    // } else {
+    //   ScaffoldMessenger.of(context).showSnackBar(
+    //     const SnackBar(
+    //       content: Text("WhatsApp is not installed on the device"),
+    //     ),
+    //   );
+    // }
   }
 
   void _makePhoneCall(BuildContext context) async {
@@ -107,18 +111,19 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
             actions: [
               IconButton(
-                icon: Icon(
-                  Icons.message,
-                  color: Colors.black38,
+                icon: Iconify(
+                  Mdi.whatsapp, // Replace IconSetName with the actual icon set name
+                  color: Colors.black38, // Set the color as needed
                 ),
                 onPressed: () {
                   _launchWhatsApp(context);
                 },
               ),
               IconButton(
-                icon: Icon(
-                  Icons.call,
-                  color: Colors.black38,
+                // Use the Iconify widget directly as the icon parameter
+                icon: Iconify(
+                  Mdi.call, // Replace IconSetName with the actual icon set name
+                  color: Colors.black38, // Set the color as needed
                 ),
                 onPressed: () {
                   _makePhoneCall(context);
