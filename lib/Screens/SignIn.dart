@@ -195,7 +195,8 @@ class _SignInState extends State<SignIn> {
                         );
                       },
                       child: Text("Sign up",
-                          style: TextStyle(color: Color(0xff2BB7A1))))
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 196, 247, 239))))
                 ],
               )
             ],

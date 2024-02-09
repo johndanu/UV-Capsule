@@ -27,6 +27,12 @@ class _OrderPlacedState extends State<OrderPlaced> {
   bool isButtonEnabled = false;
   bool isCashOnDeliveryEnabled = false;
 
+  void refreshData() {
+    setState(() {
+      dataFuture = fetch(); // Re-fetch the data
+    });
+  }
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -70,6 +76,7 @@ class _OrderPlacedState extends State<OrderPlaced> {
             duration: Duration(seconds: 2), // Adjust as needed
           ),
         );
+        refreshData();
       } else {
         // If the server did not return a 200 OK response,
         // throw an exception.
@@ -942,9 +949,14 @@ class _OrderPlacedState extends State<OrderPlaced> {
                             ),
                           )),
                       const SizedBox(height: 30),
-                      if (data.status == "Order Placed" ||
-                          data.status == "Merchant Confirmed" ||
-                          true)
+                      if ((data.status == "Order Placed" ||
+                              data.status == "Merchant Confirmed" ||
+                              true) &&
+                          (data.payment_method == null ||
+                              !data.payment_method
+                                  .toString()
+                                  .trim()
+                                  .isNotEmpty))
                         Column(
                           children: [
                             Container(
