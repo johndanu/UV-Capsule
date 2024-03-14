@@ -54,14 +54,17 @@ class MainPage extends StatelessWidget {
                 );
               },
               style: ElevatedButton.styleFrom(
-                primary: Color(0xff2AB29D),
+                backgroundColor: Color(0xff2AB29D),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15)),
                 ),
               ),
               child: Text(
                 "SIGN IN",
-                style: TextStyle(fontSize: 16),
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Color(0xffffffff),
+                ),
               ),
             ),
           ),
@@ -83,8 +86,8 @@ class MainPage extends StatelessWidget {
                 );
               },
               style: ElevatedButton.styleFrom(
-                primary:
-                    Color(0xff385592), // Match the container's background color
+                backgroundColor:
+                    Color(0xff385591), // Match the container's background color
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15)),
                 ),
@@ -93,6 +96,7 @@ class MainPage extends StatelessWidget {
                 "SIGN UP",
                 style: TextStyle(
                   fontSize: 16,
+                  color: Color(0xffffffff),
                 ),
               ),
             ),

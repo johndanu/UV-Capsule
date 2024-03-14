@@ -142,7 +142,7 @@ class _SignInState extends State<SignIn> {
                     requestOtp(context);
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Color(0xff2AB29D),
+                    backgroundColor: Color(0xff2AB29D),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(15)),
                     ),
@@ -151,7 +151,9 @@ class _SignInState extends State<SignIn> {
                     builder: (context, auth, child) {
                       return auth.isLoading
                           ? CircularProgressIndicator()
-                          : Text("REQUEST OTP", style: TextStyle(fontSize: 18));
+                          : Text("REQUEST OTP",
+                              style: TextStyle(
+                                  fontSize: 18, color: Color(0xffffffff)));
                     },
                   ),
                 ),

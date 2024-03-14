@@ -68,14 +68,14 @@ class _VerficationState extends State<Verfication> {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Color(0xff3A5896),
+                    backgroundColor: Color(0xff3A5896),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(15)),
                     ),
                   ),
                   child: Text(
                     "CREATE PROFILE",
-                    style: TextStyle(fontSize: 18),
+                    style: TextStyle(fontSize: 18, color: Color(0xffffffff)),
                   ),
                 ),
               ),

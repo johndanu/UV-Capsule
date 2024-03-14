@@ -133,7 +133,7 @@ class _SignupOTPState extends State<SignupOTP> {
                       verifyOtp(context);
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: Color(0xff3A5896),
+                      backgroundColor: Color(0xff3A5896),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(15)),
                       ),
@@ -142,7 +142,9 @@ class _SignupOTPState extends State<SignupOTP> {
                       builder: (context, auth, child) {
                         return auth.isLoading
                             ? CircularProgressIndicator()
-                            : Text("SUBMIT", style: TextStyle(fontSize: 18));
+                            : Text("SUBMIT",
+                                style: TextStyle(
+                                    fontSize: 18, color: Color(0xffffffff)));
                       },
                     ),
                   ),
